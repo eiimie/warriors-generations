@@ -15,5 +15,3 @@ The player is put into the position of a clan's Leader and has the responsibilit
 Credit to Sparrow Hartmann's amazing cat genetics calculator @ sparrows-garden.com. It was a big help in writing and organising the code for generating new genetics! 
 
 Credit to ailuronymy for their amazing resources on traditional naming as well as full lists for prefixes and suffixes! 
-
-This game was built using Redot and Aseprite.
