@@ -8,7 +8,7 @@ I've had the idea for this project for years - since I first got into the book s
 
 ## So, what's it about? 
 
-The player is put into the position of a clan's Leader and has the responsibility to manage the clan. The game is turn-based; every moon (month) characters will age up; expecting mothers can give birth; characters can die; and special events can happen. The gameplay is centred around the resource and social management of a group of characters. Watch out for leafbare (winter) or you might find your entire clan wiped out within a few months. Selectively breed for the genetics you want, but be careful about how you do it - because the way you breed your clan can have some <i>disastrous</i> effects in the long-term... 
+The player is put into the position of a clan's Leader and has the responsibility to manage the clan. The game is turn-based; every moon (month) characters will age up, expecting mothers can give birth, characters can die, and special events can happen. The gameplay is centred around the resource and social management of a group of characters. Watch out for leafbare (winter) or you might find your entire clan wiped out within a few months. Selectively breed for the genetics you want, but be careful about how you do it - because the way you breed your clan can have some <i>disastrous</i> effects in the long-term... 
 
 ## Thanks & Credits 
 
