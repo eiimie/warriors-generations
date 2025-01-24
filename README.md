@@ -12,7 +12,7 @@ The player is put into the position of a clan's Leader and has the responsibilit
 
 ## Frequently Asked Questions
 <b>How can I keep up-to-date on this?</b>
-To see updates, answered questions, and behind-the-scenes action, you can check out my tumblr blog <a href="https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations">here</a> or, alternative, copy and paste this into your web browser: https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations
+To see updates, answered questions, and behind-the-scenes action, you can check out my tumblr blog <a href="https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations">here</a> or, alternatively, copy and paste this into your web browser: https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations
 
 <b>Can cats die?</b>
 Yes, from a variety of causes - starvation, childbirth, age, injuries, etc. 
