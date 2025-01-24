@@ -30,4 +30,4 @@ I can't really give a solid answer on this until later when it's developed more.
 
 Credit to Sparrow Hartmann's amazing cat genetics calculator @ sparrows-garden.com. It was a big help in writing and organising the code for generating new genetics! 
 
-Credit to ailuronymy for their amazing resources on traditional naming as well as full lists for prefixes and suffixes! 
+Credit to ailuronymy for his amazing resources on traditional naming as well as full lists for prefixes and suffixes! 
