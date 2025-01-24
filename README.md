@@ -2,7 +2,7 @@
 
 Please note: This is a non-profit fangame based on the Warriors series by Erin Hunter made out of a passion for the books. Copyright belongs to its rightful owners.
 
-<b>Warriors: Generations</b> is a simulation game based on the <i>Warriors book series</i> by Erin Hunter, having taken inspiration from games such as <i>Lioden</i>, <i>Niche: A Genetics Survival Game</i>, <i>Flight Rising</i>, (and even <i>Rimworld</i> a teeny bit). The goal is to play as the leader of a clan and ensure its survival while carefully managing it over many generations. 
+<b>Warriors: Generations</b> is a simulation game based on the <i>Warriors book series</i> by Erin Hunter, having taken inspiration from games such as <i>Lioden</i>, <i>Niche: A Genetics Survival Game</i>, <i>Flight Rising</i>, and even <i>Rimworld</i> a teeny bit. The goal is to play as the leader of a clan and ensure its survival while carefully managing it over many generations. 
 
 I've had the idea for this project for years - since I first got into the book series in my mid teens. As someone who's always been a fan of genetics breeding games, I loved the idea of controlling my own multi-generational clan and seeing it grow from humble beginnings. I played the Sims 3 Warriors Challenge a lot but it never really scratched the itch. I first committed to this game in 2022 when I was in sixth form, intending to build it in Python, but it was only when I started university that I became truly serious about seeing my idea come to fruition. 
 
