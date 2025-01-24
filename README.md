@@ -28,6 +28,6 @@ I can't really give a solid answer on this until later when it's developed more.
 
 ## Thanks & Credits 
 
-Credit to Sparrow Hartmann's amazing cat genetics calculator @ sparrows-garden.com. It was a big help in writing and organising the code for generating new genetics! 
+Credit to Sparrow Hartmann's amazing cat genetics calculator available on <a href="https://sparrows-garden.com/">their site</a>. It was a big help in writing and organising the code for generating new genetics! (Also check out their amazing art there if you'd like!)
 
-Credit to ailuronymy for his amazing resources on traditional naming as well as full lists for prefixes and suffixes! 
+Credit to ailuronymy for his amazing resources on traditional naming as well as full lists for prefixes and suffixes! You can check out his now-defunct Warriors specific blog <a href="https://ailuronymy.tumblr.com/">here</a> or his personal blog <a href="https://solacefruit.tumblr.com/">here</a>.
