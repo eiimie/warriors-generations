@@ -10,24 +10,8 @@ I've had the idea for this project for years - since I first got into the book s
 
 The player is put into the position of a clan's Leader and has the responsibility to manage the clan. The game is turn-based; every moon (month) characters will age up, expecting mothers can give birth, characters can die, and special events can happen. The gameplay is centred around the resource and social management of a group of characters. Watch out for leafbare (winter) or you might find your entire clan wiped out within a few months. Selectively breed for the genetics you want, but be careful about how you do it - because the way you breed your clan can have some <i>disastrous</i> effects in the long-term... 
 
-## Frequently Asked Questions
-<b>How can I keep up-to-date on this?</b>
-To see updates, answered questions, and behind-the-scenes action, you can check out my tumblr blog <a href="https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations">here</a> or, alternatively, copy and paste this into your web browser: https://eiimiegames.tumblr.com/tagged/warriors%3A%20generations
-
-<b>Can cats die?</b>
-Yes, from a variety of causes - starvation, childbirth, age, injuries, etc. 
-
-<b>What platforms will this be on? Can I play it on my phone?</b>
-This will not be available on Android or iOS, but I do plan to have it available for Mac and Windows. Sorry to any phone users!
-
-<b>What languages is it in?</b>
-For now, only English. I'm learning Spanish so I'd love to be able to become proficient enough to translate it myself, though.
-
-<b>What are the system requirements?</b>
-I can't really give a solid answer on this until later when it's developed more. I expect it won't be <i>too</i> intensive and will run on older devices. 
-
 ## Thanks & Credits 
 
-Credit to Sparrow Hartmann's amazing cat genetics calculator available on <a href="https://sparrows-garden.com/">their site</a>. It was a big help in writing and organising the code for generating new genetics! (Also check out their amazing art there if you'd like!)
+Credit to Sparrow Hartmann's amazing cat genetics calculator @ sparrows-garden.com. It was a big help in writing and organising the code for generating new genetics! 
 
-Credit to ailuronymy for his amazing resources on traditional naming as well as full lists for prefixes and suffixes! You can check out his now-defunct Warriors specific blog <a href="https://ailuronymy.tumblr.com/">here</a> or his personal blog <a href="https://solacefruit.tumblr.com/">here</a>.
+Credit to ailuronymy for their amazing resources on traditional naming as well as full lists for prefixes and suffixes! 
