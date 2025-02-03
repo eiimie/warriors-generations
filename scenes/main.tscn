@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk3egb35u87fp"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_sga8h"]
+[ext_resource type="Script" path="res://scripts/moonManagement.gd" id="2_vhy1w"]
+[ext_resource type="Script" path="res://scripts/moonNextMoonScript.gd" id="3_xi5u3"]
+
+[sub_resource type="Theme" id="Theme_c3tua"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_sga8h")
+
+[node name="moonManagement" type="Node" parent="."]
+script = ExtResource("2_vhy1w")
+
+[node name="next_moon" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="moonCounterLabel" type="Label" parent="CanvasLayer"]
+offset_top = -39.0
+offset_right = 229.0
+offset_bottom = 23.0
+
+[node name="moonNextMoon" type="Button" parent="CanvasLayer"]
+offset_left = -98.0
+offset_top = -320.0
+offset_right = 101.0
+offset_bottom = -257.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Next Moon"
+script = ExtResource("3_xi5u3")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/moonNextMoon"]
+layout_mode = 0
+offset_left = -481.0
+offset_right = 671.0
+offset_bottom = 645.0
+theme = SubResource("Theme_c3tua")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
