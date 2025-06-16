@@ -64,10 +64,26 @@ static func describeThisCat(genCode: String) -> String:
 						# tortie! 
 						# if more than 5 white, considered a calico
 						# if less than 5 and a tabby, considered a torbie.
-						if whiteness == "5" or whiteness == "6" or whiteness == "4" or whiteness == "3":
+						match eumelanin:
+							"0", "1", "2":
+								catDescription += "grey-cream " if dilution == "2" else "black-red "
+							"3":
+								catDescription += "lilac-cream " if dilution == "2" else "brown-red "
+							"5":
+								catDescription += "fawn-cream " if dilution == "2" else "cinnamon-red "
+							_:
+								catDescription += "tortie "  # fallback
+
+
+						# additional label based on whiteness / tabby
+						if whiteness in ["3", "4", "5", "6"]:
 							catDescription += "calico "
 						elif tabby == "2":
 							catDescription += "torbie "
+						else:
+							catDescription += "tortoiseshell "
+
+
 			else:
 				# cat is DILUTE
 				

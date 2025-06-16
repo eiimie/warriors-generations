@@ -96,3 +96,23 @@ func _on_confirmColour_button_pressed() -> void:
 				if chosenColour.get_selected_id() == 5:
 					# fawn chosen; needs to be dilute
 					updateGeneticCode(4, "2")
+			8:
+				# tortie; 8 = black(0) & red
+				updateGeneticCode(2, "0") # set eumel to black
+				updateGeneticCode(4, "0") # set to NO dilute
+				updateGeneticCode(3, "2") # set to tortie
+			9: 
+				# tortie; 9 = brown (3) & red
+				updateGeneticCode(2, "3") # set eumel to brown
+				updateGeneticCode(4, "0") # set to NO dilute
+				updateGeneticCode(3, "2") # set to tortie
+			10:
+				# tortie; 10 = black(0) & red WITH DILUTE(2)
+				updateGeneticCode(2, "0") # set eumel to black
+				updateGeneticCode(4, "2") # set to dilute
+				updateGeneticCode(3, "2") # set to tortie
+			11: 
+				# tortie; 11 = brown (3) & red & DILUTE
+				updateGeneticCode(2, "3") # set eumel to brown
+				updateGeneticCode(4, "2") # set to dilute
+				updateGeneticCode(3, "2") # set to tortie
