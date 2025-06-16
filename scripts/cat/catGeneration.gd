@@ -1,11 +1,23 @@
 extends Node
 
+class_name Genetics
+
 # this class is to generate cats, generate offspring, 
 # generate Allegiances descriptions, and identify the appearance of a cat 
 
 # dev note - consider updating the code to use constants for alleles?
 # e.g. const NON_DILUTE = "0"; const CARRIER = "1"; etc. etc.
 # improves semantic clarity & maintainability
+
+# include alt colours for each pelt colour?
+# e.g. dark blue being an alt colour for black; "warm blue" for chocolate; "gold" for ginger? cinnamon-esque ginger?
+# (see Slugs Genetically Accurate Cats' post)
+
+# fur mutations - 
+# - russian topaz
+# - "panda" pattern white pattern; "chipmunk"
+# - "somatic mutations" (1 cell mutates into a different colour, making one part a diff colour)
+# - chimeras (2 embryos merge during development, leading to odd colours) 
 
 static var rng = RandomNumberGenerator.new()
 
@@ -55,21 +67,21 @@ static func ranGenCat_NotWeighted() -> String:
 	var dilution = rng.randi_range(0,2)
 	newCatGeneticCode += str(dilution)
 	
-	# tabby gene. 0 = solid (not a tabby). 1 = tabby carrier (solid phenotype). 2 = tabby 
+	# tabby gene. 0 = solid (not a tabby). 1 = solid (carrying tabby recessively). 2 = tabby 
 	var tabbiness
 	if furRed == 1:
 		# cat is red. red cats always tabbies.
 		tabbiness = 2
 	else: 
-		# cat is not red. could not be tabby. 
+		# cat is not red. could possibly not be tabby. 
 		tabbiness = rng.randi_range(0,2)
 	newCatGeneticCode += str(tabbiness)
 	
 	# tabby pattern. what type of stripes does the cat have?! 
-	# 0 = mackerel. 1 = classic
+	# 0 = mackerel. 1 = mackerel (carry classic). 2 = classic.
 	# extras (to add in later maybe?) incl: spotted, ticked. mayhaps more
 	
-	var tabPat = rng.randi_range(0,1)
+	var tabPat = rng.randi_range(0,2)
 	newCatGeneticCode += str(tabPat)
 	
 	var silverness = 2 
@@ -193,12 +205,13 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-	# determine sex (0 = male, 1 = female) (FIN, correct)
+	# determine sex (0 = male, 1 = female) (FIN, correct, tested)
 	var sex = rng.randi_range(0, 1)  # 0 = male, 1 = female
-	offspring_genetic_code += str(sex)
+	sex = str(sex)
+	offspring_genetic_code += sex
 	print("Sex is: ", sex)
 
-	# ----- fur length inheritance ----- (FIN, correct)
+	# ----- fur length inheritance ----- (FIN, correct, tested/working)
 	var father_fur_len = gen_code_father[1]
 	var mother_fur_len = gen_code_mother[1]
 	var fur_len = ""
@@ -229,7 +242,7 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	# ----- Eumelanin inheritance -----
 	var father_eumel = gen_code_father[2]
 	var mother_eumel = gen_code_mother[2]
-	var eumel = ""  # Ensure the variable is initialized
+	var eumel = ""  # ensure the variable is initialised
 	match father_eumel:
 		"0":
 			match mother_eumel:
@@ -282,7 +295,7 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	print("Eumelanin is: ", eumel)
 
 
-	# ----- Red inheritance ----- (FIN, correct)
+	# ----- Red inheritance ----- (FIN, correct, untested)
 	var father_red = gen_code_father[3]
 	var mother_red = gen_code_mother[3]
 	var red
@@ -318,8 +331,10 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 				else:
 					# father_red is 1
 					red = inherit_50_50(rng, "1", "2")
+	print("Red is: ", red)
+	offspring_genetic_code += red
 
-	# ----- Dilute inheritance -----
+	# ----- Dilute inheritance ----- (FIN, correct, untested)
 	var father_dilute = gen_code_father[4]
 	var mother_dilute = gen_code_mother[4]
 	var dilute = ""
@@ -349,30 +364,10 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 				# mother has 1 
 				# 2 & 1 = 50% 1 50% 2 
 				dilute = inherit_50_50(rng, "1", "2") 
-	
-	
-	
-	
-	match father_dilute:
-		"0":
-			match mother_dilute:
-				"0": dilute = "0"
-				"1": dilute = inherit_50_50(rng, "0", "1")
-				"2": dilute = "1"
-		"1":
-			match mother_dilute:
-				"0": dilute = inherit_50_50(rng, "0", "1")
-				"1": dilute = ["1", "1", "0", "2"][rng.randi_range(0, 3)]
-				"2": dilute = inherit_50_50(rng, "1", "2")
-		"2":
-			match mother_dilute:
-				"0": dilute = "1"
-				"1": dilute = inherit_50_50(rng, "1", "2")
-				"2": dilute = "2"
+	print("Dilute is: ", dilute)
 	offspring_genetic_code += dilute
-	print("Dilute is ", dilute)
 
-	# ----- Tabby inheritance -----
+	# ----- Tabby inheritance ----- (FIN, correct, untested)
 	var father_tabby = gen_code_father[5]
 	var mother_tabby = gen_code_mother[5]
 	var tabby = ""
@@ -393,60 +388,58 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 				"1": tabby = inherit_50_50(rng, "1", "2")
 				"2": tabby = "2"
 	offspring_genetic_code += tabby
-	print("Tabby is ", tabby)
+	print("Tabby is: ", tabby)
 
-	# ----- Tabby pattern inheritance -----
+	# ----- Tabby pattern inheritance ----- (FIN, correct, untested)
 	var father_tab_pat = gen_code_father[6]
 	var mother_tab_pat = gen_code_mother[6]
 	var tab_pat = ""
+
 	match father_tab_pat:
 		"0":
 			match mother_tab_pat:
 				"0": tab_pat = "0"
 				"1": tab_pat = inherit_50_50(rng, "0", "1")
+				"2": tab_pat = "1"
 		"1":
 			match mother_tab_pat:
 				"0": tab_pat = inherit_50_50(rng, "0", "1")
-				"1": tab_pat = "1"
-	offspring_genetic_code += tab_pat
-	print("Tabby pattern is ", tab_pat)
-
-	# ----- Silver inheritance -----
-	var father_silver = gen_code_father[7]
-	var mother_silver = gen_code_mother[7]
-	var silver = ""
-	match father_silver:
-		"0":
-			match mother_silver:
-				"0": silver = "0"
-				"1": silver = inherit_50_50(rng, "0", "1")
-				"2": silver = "1"
-		"1":
-			match mother_silver:
-				"0": silver = inherit_50_50(rng, "0", "1")
-				"1": silver = ["1", "1", "0", "2"][rng.randi_range(0, 3)]
-				"2": silver = inherit_50_50(rng, "1", "2")
+				"1": tab_pat = ["1", "1", "0", "2"][rng.randi_range(0, 3)]
+				"2": tab_pat = inherit_50_50(rng, "1", "2")
 		"2":
-			match mother_silver:
-				"0": silver = "1"
-				"1": silver = inherit_50_50(rng, "1", "2")
-				"2": silver = "2"
-	offspring_genetic_code += silver
-	print("Silver is ", silver)
+			match mother_tab_pat:
+				"0": tab_pat = "1"
+				"1": tab_pat = inherit_50_50(rng, "1", "2")
+				"2": tab_pat = "2"
+	offspring_genetic_code += tab_pat
+	print("Tabpat is: ", tab_pat)
 	
 	# ----- silver ----- 
+	# silver is not implemented. 
 	offspring_genetic_code += "0"
+	print("Silver is: 0")
 
-	# ----- White inheritance -----
+	# ----- White inheritance ----- (FIN, correct, untested)
 	var father_white = int(gen_code_father[9])
 	var mother_white = int(gen_code_mother[9])
-	var white = ""
-	if father_white == 0 or mother_white == 0:
-		white = str(rng.randi_range(0, 1))
-	else:
-		white = str(rng.randi_range(min(father_white, mother_white), max(father_white, mother_white)))
-	offspring_genetic_code += white
-	print("White is ", white)
+
+	var min_val = min(father_white, mother_white)
+	var max_val = max(father_white, mother_white)
+
+	# Start with base range
+	var white = rng.randi_range(min_val, max_val)
+
+	# 10% chance to deviate down
+	if rng.randi_range(1, 100) <= 5 and min_val > 0:
+		white = min_val - 1
+
+	# 10% chance to deviate up
+	elif rng.randi_range(1, 100) >= 96 and max_val < 9:  # adjust 3 if higher max
+		white = max_val + 1
+
+	offspring_genetic_code += str(white)
+	print("White is: ", white)
+
 
 	return offspring_genetic_code
 

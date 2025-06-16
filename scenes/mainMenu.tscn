@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjvu4cv2owon1"]
+[gd_scene load_steps=3 format=3 uid="uid://cjvu4cv2owon1"]
 
 [ext_resource type="Script" path="res://scenes/mainMenu.gd" id="1_lxv21"]
+[ext_resource type="Script" path="res://scenes/DEBUGDELETELATER_simbreed.gd" id="2_8jdfj"]
 
 [node name="mainMenu" type="Control"]
 layout_mode = 3
@@ -25,4 +26,91 @@ offset_right = 623.0
 offset_bottom = 210.0
 text = "Start game"
 
+[node name="TextEditFather" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 470.0
+offset_top = 325.0
+offset_right = 711.0
+offset_bottom = 370.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 292.0
+offset_right = 727.0
+offset_bottom = 324.0
+text = "Father's code"
+
+[node name="TextEditMother" type="TextEdit" parent="."]
+offset_left = 471.0
+offset_top = 419.0
+offset_right = 712.0
+offset_bottom = 464.0
+
+[node name="TextEditOffspring" type="TextEdit" parent="."]
+offset_left = 472.0
+offset_top = 524.0
+offset_right = 713.0
+offset_bottom = 569.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 511.0
+offset_top = 385.0
+offset_right = 702.0
+offset_bottom = 417.0
+text = "Mother's code"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 522.0
+offset_top = 481.0
+offset_right = 713.0
+offset_bottom = 513.0
+text = "Results in"
+
+[node name="TextEditOffspring2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 747.0
+offset_top = 437.0
+offset_right = 901.0
+offset_bottom = 468.0
+text = "Generate offspring"
+script = ExtResource("2_8jdfj")
+
+[node name="generatenewcat" type="Button" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 112.0
+offset_right = 173.0
+offset_bottom = 143.0
+text = "New genetic code"
+
+[node name="newcatcodegohere" type="TextEdit" parent="generatenewcat"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 43.0
+offset_right = 206.0
+offset_bottom = 74.0
+placeholder_text = "new code go here
+"
+
+[node name="TextEditNewDescription" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 204.0
+offset_right = 294.0
+offset_bottom = 270.0
+placeholder_text = "Cat description here
+"
+
+[node name="DEBUGDELETELATER_NewLeaderScreen" type="Button" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 165.0
+offset_bottom = 45.0
+text = "New leader screen"
+
 [connection signal="pressed" from="mainMenuStartGameButton" to="." method="_on_StartGame_StartButton_up"]
+[connection signal="pressed" from="TextEditOffspring2" to="." method="GENERATEOFFSPRINGDEBUGTEST"]
+[connection signal="pressed" from="generatenewcat" to="." method="_on_generatenewcat_pressed_DELETELATERDEBUG"]
+[connection signal="pressed" from="DEBUGDELETELATER_NewLeaderScreen" to="." method="_on_debugdeletelater_new_leader_screen_pressed"]

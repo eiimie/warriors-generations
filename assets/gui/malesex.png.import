@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx84p7313e321"
-path="res://.godot/imported/tempIcon.jpg-1840557ed4cc7c045dbf43fac39a13c2.ctex"
+uid="uid://wjafo81cisev"
+path="res://.godot/imported/malesex.png-c177e53f565c9556473b6ab3e10fe6aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tempIcon.jpg"
-dest_files=["res://.godot/imported/tempIcon.jpg-1840557ed4cc7c045dbf43fac39a13c2.ctex"]
+source_file="res://assets/gui/malesex.png"
+dest_files=["res://.godot/imported/malesex.png-c177e53f565c9556473b6ab3e10fe6aa.ctex"]
 
 [params]
 

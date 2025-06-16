@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgmfxtt5eid28"
-valid=false
+uid="uid://dml1pp5kburw1"
+path="res://.godot/imported/malesex.jpg-038bbbb59235a6c2ecf7bc0d20f02df9.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://assets/icon.webp"
+source_file="res://assets/gui/malesex.jpg"
+dest_files=["res://.godot/imported/malesex.jpg-038bbbb59235a6c2ecf7bc0d20f02df9.ctex"]
 
 [params]
 

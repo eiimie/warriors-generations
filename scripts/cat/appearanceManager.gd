@@ -1,5 +1,7 @@
 # handles appearance descriptors based on genetic code 
 
+class_name Appearance
+
 static var rng = RandomNumberGenerator.new()
 
 # a method to return an Allegiances-style description of a cat based on its genetic code 
@@ -8,6 +10,10 @@ static func describeThisCat(genCode: String) -> String:
 	# credit to https://perchance.org/warriorcats-allegiances-generator for giving me inspiration
 	# and of course the books themselves
 	# NO REFERENCE TO PERSONALITIES OR SPECIAL TRAITS (e.g. long whiskers or long tail) - future feature?
+	
+	
+	# DEBUG - naming a Grey molly as "a ginger molly"
+	
 	var catDescription
 	
 	# first validate the argument
@@ -29,7 +35,7 @@ static func describeThisCat(genCode: String) -> String:
 		var thisCatIsWhite = false
 		
 		# does cat have SUBSTANTIAL WHITE (whiteness = 7 8 or 9)
-		if whiteness == "7" or whiteness == "8" or whiteness == "9":
+		if whiteness == "8" or whiteness == "9":
 			# it does! it should be described as white! 
 			thisCatIsWhite = true
 			catDescription += "white "
@@ -42,10 +48,10 @@ static func describeThisCat(genCode: String) -> String:
 					"0":
 						# not red
 						match eumelanin: 
-							"5","3":
+							"5":
 								# cinnamon
-								catDescription += "light brown "
-							"4": 
+								catDescription += "reddish brown "
+							"3", "4": 
 								# chocolate
 								catDescription += "brown "
 							"0","1","2":
@@ -70,10 +76,10 @@ static func describeThisCat(genCode: String) -> String:
 					"0":
 						# not red
 						match eumelanin: 
-							"5","3":
+							"5":
 								# cinnamon
 								catDescription += "fawn "
-							"4": 
+							"3", "4": 
 								# chocolate
 								catDescription += "lilac "
 							"0","1","2":

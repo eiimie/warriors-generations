@@ -1,4 +1,3 @@
-# member_resource.gd
 extends Resource
 class_name Member
 
@@ -9,6 +8,7 @@ var sex: int
 var age: int
 var rank: int
 # 0 = leader, 1 = kit, 2 = apprentice, 3 = warrior, 4 = medicine cat, 5 = deputy, 6 = elder
+# 7 = rogue, 8 = kittypet (hidden from user's sight)
 var genetic_code: String
 var prefix: String
 var suffix: String

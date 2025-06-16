@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx84p7313e321"
-path="res://.godot/imported/tempIcon.jpg-1840557ed4cc7c045dbf43fac39a13c2.ctex"
+uid="uid://dupkqop3c13gw"
+path="res://.godot/imported/femalesex.webp-8e95e0d77a6612c5b304af23eb660962.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tempIcon.jpg"
-dest_files=["res://.godot/imported/tempIcon.jpg-1840557ed4cc7c045dbf43fac39a13c2.ctex"]
+source_file="res://assets/gui/femalesex.webp"
+dest_files=["res://.godot/imported/femalesex.webp-8e95e0d77a6612c5b304af23eb660962.ctex"]
 
 [params]
 
