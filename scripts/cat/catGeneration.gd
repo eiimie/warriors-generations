@@ -3,6 +3,10 @@ extends Node
 # this class is to generate cats, generate offspring, 
 # generate Allegiances descriptions, and identify the appearance of a cat 
 
+# dev note - consider updating the code to use constants for alleles?
+# e.g. const NON_DILUTE = "0"; const CARRIER = "1"; etc. etc.
+# improves semantic clarity & maintainability
+
 static var rng = RandomNumberGenerator.new()
 
 # ************ FUNCTIONS AND STATUS
@@ -173,15 +177,15 @@ static func ranGenCat_Weighted(weighting: String) -> String:
 	return newCatGeneticCode
 
 
-# Hhlper function for 50/50 inheritance
+# helper function for 50/50 inheritance
 static func inherit_50_50(rng: RandomNumberGenerator, option1, option2) -> String:
 	return option1 if rng.randi_range(0, 1) == 0 else option2
 
 # generate offspring from two given genetic codes
 # returns offspringGeneticCode 
 static func generate_offspring(gen_code_father: String, gen_code_mother: String) -> String:
-	# Validate genetic codes
-	var expected_length = 10  # Change this if your genetic code length changes
+	# validate genetic codes
+	var expected_length = 10  # change this if genetic code length changes
 	if gen_code_father.length() < expected_length or gen_code_mother.length() < expected_length:
 		return "ERROR: Genetic codes are too short."
 
@@ -189,12 +193,12 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-	# Determine sex (0 = male, 1 = female)
+	# determine sex (0 = male, 1 = female) (FIN, correct)
 	var sex = rng.randi_range(0, 1)  # 0 = male, 1 = female
 	offspring_genetic_code += str(sex)
 	print("Sex is: ", sex)
 
-	# ----- Fur length inheritance -----
+	# ----- fur length inheritance ----- (FIN, correct)
 	var father_fur_len = gen_code_father[1]
 	var mother_fur_len = gen_code_mother[1]
 	var fur_len = ""
@@ -207,8 +211,13 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 		"1":
 			match mother_fur_len:
 				"0": fur_len = inherit_50_50(rng, "0", "1")
-				"1": fur_len = inherit_50_50(rng, "1", "1")
-				"2": fur_len = "1"
+				"1": 
+					# 50% 1, 25% 0, 25% 2
+					match rng.randi_range(0,3):
+						0, 1: fur_len = "1"
+						2: fur_len = "0"
+						3: fur_len = "2"
+				"2": fur_len = inherit_50_50(rng, "1", "2")
 		"2":
 			match mother_fur_len:
 				"0": fur_len = "1"
@@ -273,28 +282,77 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	print("Eumelanin is: ", eumel)
 
 
-	# ----- Red inheritance -----
+	# ----- Red inheritance ----- (FIN, correct)
 	var father_red = gen_code_father[3]
 	var mother_red = gen_code_mother[3]
 	var red
-	match father_red:
-		"0":
-			match mother_red:
-				"0": red = "0"
-				"1": red = "1" if sex == 0 else "2"
-				"2": red = inherit_50_50(rng, "0", "1") if sex == 0 else inherit_50_50(rng, "0", "2")
-		"1":
-			match mother_red:
-				"0": red = "0" if sex == 0 else "2"
-				"1": red = "1"
-				"2": red = inherit_50_50(rng, "0", "1") if sex == 0 else inherit_50_50(rng, "1", "2")
-	offspring_genetic_code += red
-	print("Red is ", red)
+	
+	if sex == "0": # male
+		# sex is X-linked (carried on the X chromosome)
+		# to be male, cats will have inherited the Y chromosome from father
+		# this means they can only get the X chromosome from their mother
+		# aka they can only inherit what their mother has 
+		if mother_red == "2":
+			red = inherit_50_50(rng, "0", "1") #tortie mother; 50/50 red or black
+		else:
+			red = mother_red #mother passes her colour directly,see X-linked comment above
+	else: # female
+		# females inherit one X from each parent
+		# unlike males
+		match mother_red:
+			"0": 
+				if father_red == "0":
+					red = "0"
+				else:
+					#father red is 1
+					red = "2"
+			"1":
+				if father_red == "0":
+					red = "2"
+				else:
+					red = "1"
+					# father red is 1
+			"2":
+				if father_red == "0":
+					red = inherit_50_50(rng, "0", "2")
+				else:
+					# father_red is 1
+					red = inherit_50_50(rng, "1", "2")
 
 	# ----- Dilute inheritance -----
 	var father_dilute = gen_code_father[4]
 	var mother_dilute = gen_code_mother[4]
 	var dilute = ""
+	
+	match father_dilute:
+		"0":
+			if mother_dilute == "0": dilute = "0" # 0 and 0 - 100% 0
+			elif mother_dilute == "2": dilute = "1" # 0 and 2 - 100% 1
+			else:
+				# 0 and 1 (50% 0, 50% 1)
+				dilute = inherit_50_50(rng, "0", "1") 
+		"1":
+			if mother_dilute == "0": 
+				dilute = inherit_50_50(rng, "0", "1")  #1 & 0 - 50% 0, 50% 1
+			elif mother_dilute == "1": # 1 & 1 = 50% 1, 25% 0, 25% 2
+				match rng.randi_range(0,3):
+					0, 1: dilute = "1"
+					2: dilute = "0"
+					3: dilute = "2"
+			else: 
+				# 1 & 2 = 50% 1 50% 2
+				dilute = inherit_50_50(rng, "1", "2") 
+		"2":
+			if mother_dilute == "2": dilute = "2" # 2 & 2 = 100% 2 (no recessive traits to pass on)
+			elif mother_dilute == "0": dilute = "1" # 2 & 0 = 100% 1 (recessive)
+			else:
+				# mother has 1 
+				# 2 & 1 = 50% 1 50% 2 
+				dilute = inherit_50_50(rng, "1", "2") 
+	
+	
+	
+	
 	match father_dilute:
 		"0":
 			match mother_dilute:
