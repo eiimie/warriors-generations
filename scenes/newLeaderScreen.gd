@@ -9,6 +9,11 @@ extends Control
 @onready var chosenSex = $newLeader_pickSex_Dropdown
 @onready var chosenColour = $newLeader_pickColour_Dropdown
 @onready var tabbyButton = $newLeader_pickIfTabby_Dropdown
+@onready var isTabby = $newLeader_pickIfTabby_Dropdown
+@onready var chosenWhite = $whitenessSlider_Slider
+
+# cat portrait initialisation 
+@onready var portrait = $catPortrait_LeaderInstance
 
 var geneticCode = "0001000000"
 # [0] sex, 0 = male and 1 = female
@@ -28,6 +33,7 @@ func _process(delta: float) -> void:
 
 func updateGeneticCode(index: int, value: String) -> void:
 	geneticCode = geneticCode.substr(0, index) + value + geneticCode.substr(index + 1)
+	portrait.displayCat(geneticCode)
 
 func _newLeader_on_setNewPrefix_button_pressed() -> void:
 	var newPrefix = nameInput.text.strip_edges()
@@ -116,3 +122,25 @@ func _on_confirmColour_button_pressed() -> void:
 				updateGeneticCode(2, "3") # set eumel to brown
 				updateGeneticCode(4, "2") # set to dilute
 				updateGeneticCode(3, "2") # set to tortie
+
+func _on_confirm_ifTabby_button_pressed() -> void:
+	if isTabby.get_selected_id() == 0:
+		# solid chosen
+		updateGeneticCode(5, "0")
+	else: 
+		# tabby chosen
+		updateGeneticCode(5, "2")
+
+
+func _on_confirm_whiteness_button_pressed() -> void:
+	var howWhite = str(int(chosenWhite.value))
+	updateGeneticCode(9, howWhite) 
+
+
+func _on_leaderIsNowReady_button_pressed() -> void:
+	_newLeader_on_setNewPrefix_button_pressed()
+	_on_confirmSex_button_pressed()
+	_on_confirmColour_button_pressed()
+	_on_confirm_ifTabby_button_pressed()
+	_on_confirm_whiteness_button_pressed()
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
