@@ -45,12 +45,5 @@ offset_bottom = 648.0
 [node name="leaderDisplay" parent="." instance=ExtResource("2_ovlne")]
 position = Vector2(10, 71)
 
-[node name="openDebugMenu" type="Button" parent="."]
-offset_left = 987.0
-offset_top = 10.0
-offset_right = 1139.0
-offset_bottom = 41.0
-text = "Open debug menu"
-
 [connection signal="pressed" from="nextMoonButton" to="." method="_on_nextMoonButton_pressed"]
 [connection signal="pressed" from="backToMainMenuButton" to="." method="on_Game_backToMainMenu_button_pressed"]

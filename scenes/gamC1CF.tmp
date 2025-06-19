@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://kqhtqhtwgw6e"]
+[gd_scene load_steps=2 format=3 uid="uid://kqhtqhtwgw6e"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_d3ldv"]
-[ext_resource type="PackedScene" uid="uid://brpr71os1rsp2" path="res://scenes/memberDisplay.tscn" id="2_ovlne"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -38,19 +37,9 @@ text = "Back to menu"
 [node name="clanMembersVBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 234.0
+offset_top = 94.0
 offset_right = 379.0
 offset_bottom = 648.0
-
-[node name="leaderDisplay" parent="." instance=ExtResource("2_ovlne")]
-position = Vector2(10, 71)
-
-[node name="openDebugMenu" type="Button" parent="."]
-offset_left = 987.0
-offset_top = 10.0
-offset_right = 1139.0
-offset_bottom = 41.0
-text = "Open debug menu"
 
 [connection signal="pressed" from="nextMoonButton" to="." method="_on_nextMoonButton_pressed"]
 [connection signal="pressed" from="backToMainMenuButton" to="." method="on_Game_backToMainMenu_button_pressed"]

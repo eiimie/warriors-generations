@@ -1,7 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjvu4cv2owon1"]
 
 [ext_resource type="Script" path="res://scenes/mainMenu.gd" id="1_lxv21"]
-[ext_resource type="Script" path="res://scenes/DEBUGDELETELATER_simbreed.gd" id="2_8jdfj"]
+
+[sub_resource type="GDScript" id="GDScript_ngtmh"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="mainMenu" type="Control"]
 layout_mode = 3
@@ -78,7 +91,7 @@ offset_top = 437.0
 offset_right = 901.0
 offset_bottom = 468.0
 text = "Generate offspring"
-script = ExtResource("2_8jdfj")
+script = SubResource("GDScript_ngtmh")
 
 [node name="generatenewcat" type="Button" parent="."]
 layout_mode = 0
@@ -106,15 +119,6 @@ offset_bottom = 270.0
 placeholder_text = "Cat description here
 "
 
-[node name="DEBUGDELETELATER_NewLeaderScreen" type="Button" parent="."]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 14.0
-offset_right = 165.0
-offset_bottom = 45.0
-text = "New leader screen"
-
 [connection signal="pressed" from="mainMenuStartGameButton" to="." method="_on_StartGame_StartButton_up"]
 [connection signal="pressed" from="TextEditOffspring2" to="." method="GENERATEOFFSPRINGDEBUGTEST"]
 [connection signal="pressed" from="generatenewcat" to="." method="_on_generatenewcat_pressed_DELETELATERDEBUG"]
-[connection signal="pressed" from="DEBUGDELETELATER_NewLeaderScreen" to="." method="_on_debugdeletelater_new_leader_screen_pressed"]

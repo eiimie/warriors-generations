@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://brpr71os1rsp2"]
+
+[ext_resource type="PackedScene" uid="uid://bj5yfd4huc0bl" path="res://scenes/catPortrait.tscn" id="1_1fe2t"]
+[ext_resource type="Script" path="res://scenes/memberDisplay.gd" id="1_v6btt"]
+
+[sub_resource type="Theme" id="Theme_30xwq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7gw3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="memberDisplay" type="Node2D"]
+script = ExtResource("1_v6btt")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 409.0
+offset_bottom = 150.0
+theme = SubResource("Theme_30xwq")
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+clip_contents = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 154.0
+offset_bottom = 142.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7gw3")
+
+[node name="catPortrait" parent="Panel/PanelContainer" instance=ExtResource("1_1fe2t")]
+position = Vector2(14, 2)
+scale = Vector2(2.63, 2.63)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_left = 169.0
+offset_top = 14.0
+offset_right = 396.0
+offset_bottom = 134.0
+
+[node name="memberName_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Placeholderclaw"
+
+[node name="memberAge_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "13 moons"
+
+[node name="memberRole_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Warrior"
+
+[node name="description_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "A ginger tabby cat."

@@ -3,6 +3,8 @@ extends Node
 var currentMoon = 0
 var livingCatCount = 0
 
+var leaderCat: Leader
+
 #var living_cats: Array = []
 #var dead_cats: Array = []
 

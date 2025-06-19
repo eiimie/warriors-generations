@@ -14,3 +14,14 @@ var prefix: String
 var suffix: String
 var isPregnant: bool
 var pregnancyProgress: int
+
+func getRoleName(rank) -> String: 
+	match rank:
+		0: return "Leader"
+		1: return "Kit"
+		2: return "Apprentice"
+		3: return "Warrior"
+		4: return "Medicine cat"
+		5: return "Deputy"
+		6: return "Elder"
+		_: return "Outsider"

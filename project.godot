@@ -18,7 +18,6 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
-WgCommands="*res://scripts/wg_commands.gd"
 PlayerClan="*res://scripts/clan/playerClan.gd"
 
 [editor]

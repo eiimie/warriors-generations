@@ -1,7 +1,7 @@
 extends Control
 
 func _on_StartGame_StartButton_up():
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_tree().change_scene_to_file("res://scenes/startingNewGame_NewLeader.tscn")
 	
 	# Create a playerClan instance
 	var clan = playerClan.new()
@@ -78,5 +78,3 @@ func _on_generatenewcat_pressed_DELETELATERDEBUG() -> void:
 	$generatenewcat/newcatcodegohere.text = Genetics.ranGenCat_NotWeighted()
 	$TextEditNewDescription.text = Appearance.describeThisCat($generatenewcat/newcatcodegohere.text)
 	
-func _on_debugdeletelater_new_leader_screen_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/startingNewGame_NewLeader.tscn")

@@ -11,21 +11,23 @@ extends Control
 @onready var tabbyButton = $newLeader_pickIfTabby_Dropdown
 @onready var isTabby = $newLeader_pickIfTabby_Dropdown
 @onready var chosenWhite = $whitenessSlider_Slider
+@onready var geneticCode = "0021020000"
 
 # cat portrait initialisation 
 @onready var portrait = $catPortrait_LeaderInstance
 
-var geneticCode = "0001000000"
-# [0] sex, 0 = male and 1 = female
-# [1] furlen, 0 = short, 1 = short (long), 2 = long
-# [2] eumel. 0 = black. 3 = chocolate. 5 = cinnamon.
-# [3] red. 0 = not red. 1 = red. (also tortie, but n/a)
-# [4] dilution. 0 = not dilute. 2 = dilute
-# [5] tabby. 0 = solid. 2 = tabby
-# [6] tabby pattern. 0 = mackerel. 2 = classic.
-# [7] silver. 0 for now.
-# [8] point. 0 for now.
-# [9] whiteness level.
+# make an instance of Leader with placeholder values
+var leaderCat = Leader.new()
+
+func _ready():
+	leaderCat.lives = 9
+	leaderCat.sex = 0
+	leaderCat.age = randi_range(13,20)
+	leaderCat.rank = 0
+	leaderCat.genetic_code = "0021020000"
+	leaderCat.prefix = "Ginger"
+	leaderCat.suffix = "star"
+	leaderCat.name = leaderCat.prefix + leaderCat.suffix
 
 func _process(delta: float) -> void:
 	$DEBUGDELETELATER_GENETICCODE.text = geneticCode
@@ -34,13 +36,17 @@ func _process(delta: float) -> void:
 func updateGeneticCode(index: int, value: String) -> void:
 	geneticCode = geneticCode.substr(0, index) + value + geneticCode.substr(index + 1)
 	portrait.displayCat(geneticCode)
+	leaderCat.genetic_code = geneticCode
 
 func _newLeader_on_setNewPrefix_button_pressed() -> void:
 	var newPrefix = nameInput.text.strip_edges()
 	displayName.text = newPrefix + "star"
+	leaderCat.prefix = newPrefix
 
 func _on_confirmSex_button_pressed() -> void:
-	if chosenSex.get_selected_id() == 0:
+	var sex = chosenSex.get_selected_id()
+	leaderCat.sex = sex
+	if sex == 0:
 		# male selected
 		updateGeneticCode(0, "0")
 
@@ -131,16 +137,19 @@ func _on_confirm_ifTabby_button_pressed() -> void:
 		# tabby chosen
 		updateGeneticCode(5, "2")
 
-
 func _on_confirm_whiteness_button_pressed() -> void:
 	var howWhite = str(int(chosenWhite.value))
 	updateGeneticCode(9, howWhite) 
 
-
 func _on_leaderIsNowReady_button_pressed() -> void:
+	# confirm all options
 	_newLeader_on_setNewPrefix_button_pressed()
 	_on_confirmSex_button_pressed()
 	_on_confirmColour_button_pressed()
 	_on_confirm_ifTabby_button_pressed()
 	_on_confirm_whiteness_button_pressed()
+	leaderCat.name = leaderCat.prefix + leaderCat.suffix
+	
+	Global.leaderCat = leaderCat
+	
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
