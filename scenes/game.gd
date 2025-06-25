@@ -8,11 +8,10 @@ var clan
 var myLeader = Global.leaderCat
 
 func _ready():
+	clan = playerClan.new() # create an instance of the clan
 	updateMoonCounter()
 	myLeader.printInfo()
 	leaderDisplay.displayMember(myLeader)
-	
-	clan = playerClan.new()
 	
 	var allCats = clan.getAllCats()
 	for cat in allCats:
@@ -20,7 +19,21 @@ func _ready():
 		#memberDisplay.displayMember(cat)
 		clanMembersDisplay.add_child(memberDisplay)
 	
-	# Create a playerClan instance
+	# deubg - testing suffixes and prefixes
+	print("4 Random suffixes -- ")
+	for x in range(4):
+		print(Global.randomSuffix())
+	
+	print("Random prefixes -- ")
+	print("Black: ", Global.randomPrefix("black"))
+	print("Blue: ", Global.randomPrefix("blue"))
+	print("Brown: ", Global.randomPrefix("brown"))
+	print("Red: ", Global.randomPrefix("red"))
+	print("Golden: ", Global.randomPrefix("golden"))
+	print("Bi: ", Global.randomPrefix("bi"))
+	print("Tri: ", Global.randomPrefix("tri"))
+	print("Pattern: ", Global.randomPrefix("pattern"))
+	print("White: ", Global.randomPrefix("white"))
 
 # quick refresh the container displaying cat members
 func refreshAllCatDisplays():

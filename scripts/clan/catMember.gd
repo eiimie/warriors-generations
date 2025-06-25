@@ -15,6 +15,7 @@ var suffix: String
 var isPregnant: bool
 var pregnancyProgress: int
 
+# returns what role they are 
 func getRoleName(rank) -> String: 
 	match rank:
 		0: return "Leader"
@@ -25,3 +26,33 @@ func getRoleName(rank) -> String:
 		5: return "Deputy"
 		6: return "Elder"
 		_: return "Outsider"
+
+# returns pronouns
+func getSheHe(Member, pronoun) -> String:
+	# returns pronouns
+	# 0 = she / he
+	# 1 = her / him
+	# 2 = hers / his 
+	match pronoun:
+		"she/he": 
+			if Member.sex == 0:
+				return "he"
+			else:
+				return "she"
+		"her/him": 
+			if Member.sex == 0:
+				return "him"
+			else:
+				return "her"
+		"hers/his": 
+			if Member.sex == 0:
+				return "his"
+			else:
+				return "hers"
+	return ("they/them/their")
+
+# change prefix
+# change suffix
+func changePrefix(Member, newPrefix):
+	Member.prefix = newPrefix
+	Member.name = Member.prefix + Member.suffix
