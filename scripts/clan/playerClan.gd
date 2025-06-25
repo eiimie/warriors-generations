@@ -3,6 +3,7 @@ extends Node
 class_name playerClan 
 
 var cats: Dictionary = {}
+var population = 0
 
 # add a new cat to the clan 
 func addNewCatToClan(catId: int, catName: String, catSex: int, catAge: int, 
@@ -26,6 +27,12 @@ catIsPregnant: bool, catPregProgress: int) -> Member:
 	
 	return newCat
 
+# automatically gets the next ID for a new cat in the clan 
+# using the population
+func getNewCatID():
+	population += 1 
+	return population
+
 func addCatToClan(cat: Member) -> void:
 	cats[cat.id] = cat
 
@@ -36,10 +43,19 @@ func getCat(cat_id: int) -> Member:
 	return cats.get(cat_id)
 
 # get all cats in the clan 
-
 func getAllCats() -> Array:
+	for cat in cats.values():
+		print("-- ID:", cat.id)
+		print("Name: ", cat.name)
 	return cats.values()
 
+# age up all cats by 1 moon
+func ageUpAllCats(clan):
+	for cat in cats.values():
+		print("old age was ", cat.age)
+		cat.age += 1
+		print("now its ", cat.age)
+	print("yay!")
 # get all living cats
 func getLivingCats() -> Array:
 	return cats.values().filter(func(cat): return cat.rank != -1)  # rank = -1 means dead
