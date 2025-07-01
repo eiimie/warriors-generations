@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://brpr71os1rsp2"]
 
-[ext_resource type="PackedScene" uid="uid://bj5yfd4huc0bl" path="res://scenes/catPortrait.tscn" id="1_1fe2t"]
-[ext_resource type="Script" path="res://scenes/memberDisplay.gd" id="1_v6btt"]
+[ext_resource type="PackedScene" uid="uid://bj5yfd4huc0bl" path="res://scenes/characters/catPortrait.tscn" id="1_1fe2t"]
+[ext_resource type="Script" path="res://scenes/characters/memberDisplay.gd" id="1_v6btt"]
 
 [sub_resource type="Theme" id="Theme_30xwq"]
 
@@ -43,8 +43,8 @@ offset_bottom = 142.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s7gw3")
 
 [node name="catPortrait" parent="Panel/PanelContainer" instance=ExtResource("1_1fe2t")]
-position = Vector2(14, 2)
-scale = Vector2(2.63, 2.63)
+clip_contents = true
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
