@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgm4ye8gpkbdc"]
+
+[ext_resource type="AudioStream" uid="uid://c2t8wdxu8c5ih" path="res://assets/audio/sfx/buttonClick.mp3" id="1_j46sm"]
+[ext_resource type="AudioStream" uid="uid://d33gsefqekb0v" path="res://assets/audio/music/bgm_mainMenu.mp3" id="2_3xeis"]
+[ext_resource type="AudioStream" uid="uid://b4h288df4j31j" path="res://assets/audio/sfx/bgm_natureSounds.mp3" id="3_7ikis"]
+[ext_resource type="AudioStream" uid="uid://dfx3or6acbcad" path="res://assets/audio/sfx/pageTurning.mp3" id="4_6sfi0"]
+
+[node name="AudioManager" type="Node"]
+
+[node name="buttonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_j46sm")
+
+[node name="bgm_mainMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3xeis")
+autoplay = true
+
+[node name="bgm_natureSoundsOverlap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7ikis")
+
+[node name="pageTurn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6sfi0")

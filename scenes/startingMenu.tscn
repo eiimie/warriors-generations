@@ -1,0 +1,153 @@
+[gd_scene load_steps=10 format=3 uid="uid://28u5p6ebg4vi"]
+
+[ext_resource type="StyleBox" uid="uid://bsds0ab27d2v5" path="res://assets/ui/themes and styleboxes/hoverButton.tres" id="1_ljilw"]
+[ext_resource type="Texture2D" uid="uid://dho8y4o02ai7d" path="res://assets/ui/guiBox.png" id="2_3dfgn"]
+[ext_resource type="Theme" uid="uid://ro4pnv2rc2x7" path="res://assets/ui/themes and styleboxes/defaultTheme.tres" id="3_4ru1c"]
+[ext_resource type="Texture2D" uid="uid://babo7xgvs01ah" path="res://assets/ui/starclanGuiBox.png" id="4_lajrg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8w8qj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktjnr"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clg7r"]
+bg_color = Color(0.690196, 0.533333, 0.384314, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oefut"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="Theme" id="Theme_2o4qk"]
+Button/colors/font_color = Color(0.152941, 0.12549, 0.109804, 1)
+Button/font_sizes/font_size = 30
+Button/styles/focus = SubResource("StyleBoxEmpty_8w8qj")
+Button/styles/hover = ExtResource("1_ljilw")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_ktjnr")
+Button/styles/normal = SubResource("StyleBoxFlat_clg7r")
+Button/styles/pressed = SubResource("StyleBoxEmpty_oefut")
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2o4qk")
+
+[node name="defaultVineMenu" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1215.0
+offset_top = -313.0
+offset_right = -642.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3dfgn")
+region_rect = Rect2(2.5, -1.64463, 503, 429)
+patch_margin_left = 73
+patch_margin_top = 68
+patch_margin_right = 70
+patch_margin_bottom = 66
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="defaultVineMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.202703
+anchor_top = 0.214052
+anchor_right = 0.797297
+anchor_bottom = 0.785948
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="defaultVineMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"
+
+[node name="Button2" type="Button" parent="defaultVineMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"
+
+[node name="Button3" type="Button" parent="defaultVineMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"
+
+[node name="starclanMenu" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -530.0
+offset_right = 493.0
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_lajrg")
+region_rect = Rect2(2.5, -1.64463, 503, 409.517)
+patch_margin_left = 27
+patch_margin_top = 87
+patch_margin_right = 37
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="starclanMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.337998
+anchor_top = 0.500483
+anchor_right = 0.679225
+anchor_bottom = 0.500483
+offset_left = -95.0
+offset_top = -185.5
+offset_right = 95.0
+offset_bottom = 185.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"
+
+[node name="Button2" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"
+
+[node name="Button3" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_4ru1c")
+text = "button"

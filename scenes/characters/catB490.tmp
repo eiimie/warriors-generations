@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bj5yfd4huc0bl"]
+
+[ext_resource type="Script" path="res://scenes/characters/catPortrait.gd" id="1_c4wl5"]
+[ext_resource type="Texture2D" uid="uid://d2j6fjy70qmxg" path="res://assets/art/cat/base/short_blue.png" id="2_qm0h0"]
+[ext_resource type="Texture2D" uid="uid://bsmpww7osta7f" path="res://assets/art/cat/eyecolour/74.png" id="3_k5kc8"]
+[ext_resource type="Texture2D" uid="uid://cydtisxlebrq1" path="res://assets/art/cat/pattern/short_mackerel.png" id="4_s2vrl"]
+[ext_resource type="Texture2D" uid="uid://d2qk7rveodsbb" path="res://assets/art/cat/leather/blue.png" id="5_q8yy8"]
+[ext_resource type="Texture2D" uid="uid://iiklm5sfa8vd" path="res://assets/art/cat/white/short_3.png" id="6_bce2j"]
+[ext_resource type="Texture2D" uid="uid://bg0182g0fad8w" path="res://assets/art/cat/lineart/short.png" id="7_tuh48"]
+
+[node name="catPortrait" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_c4wl5")
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(0.4, 0.4)
+
+[node name="baseColour" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("2_qm0h0")
+
+[node name="eyes" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("3_k5kc8")
+
+[node name="pattern" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("4_s2vrl")
+
+[node name="leather" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("5_q8yy8")
+
+[node name="white" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("6_bce2j")
+
+[node name="lineart" type="Sprite2D" parent="Node2D"]
+texture = ExtResource("7_tuh48")

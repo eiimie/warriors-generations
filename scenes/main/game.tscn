@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://kqhtqhtwgw6e"]
+
+[ext_resource type="Script" path="res://scenes/main/game.gd" id="1_d3ldv"]
+[ext_resource type="PackedScene" uid="uid://brpr71os1rsp2" path="res://scenes/characters/memberDisplay.tscn" id="2_ovlne"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_d3ldv")
+
+[node name="moonCounterLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_right = 655.0
+offset_bottom = 67.0
+text = "Moons: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="nextMoonButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 629.0
+offset_top = 20.0
+offset_right = 728.0
+offset_bottom = 51.0
+text = "Next moon!"
+
+[node name="backToMainMenuButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 26.0
+offset_right = 137.0
+offset_bottom = 57.0
+text = "Back to menu"
+
+[node name="leaderDisplay" parent="." instance=ExtResource("2_ovlne")]
+offset_left = 10.0
+offset_top = 71.0
+offset_right = 10.0
+offset_bottom = 71.0
+script = null
+
+[node name="openDebugMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 987.0
+offset_top = 10.0
+offset_right = 1139.0
+offset_bottom = 41.0
+text = "Open debug menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 69.0
+offset_right = 1136.0
+offset_bottom = 605.0
+
+[node name="debug_addRandomCat" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Add random cat "
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Check can"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 234.0
+offset_right = 468.0
+offset_bottom = 635.0
+
+[node name="clanMembersVBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 150
+
+[connection signal="pressed" from="nextMoonButton" to="." method="_on_nextMoonButton_pressed"]
+[connection signal="pressed" from="backToMainMenuButton" to="." method="on_Game_backToMainMenu_button_pressed"]
+[connection signal="pressed" from="openDebugMenu" to="." method="_on_open_debug_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/debug_addRandomCat" to="." method="_on_debug_addRandomCat_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_debug_checkClan_button_pressed"]

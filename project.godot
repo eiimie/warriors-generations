@@ -11,14 +11,23 @@ config_version=5
 [application]
 
 config/name="Warriors Generations"
-run/main_scene="res://scenes/mainMenu.tscn"
+run/main_scene="res://scenes/main/mainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/icon.png"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-PlayerClan="*res://scripts/clan/playerClan.gd"
+AudioManager="*res://scenes/audio/audioManager.tscn"
+Global="*res://scripts/core/global.gd"
+PlayerClan="*res://scripts/core/playerClan.gd"
+nameDB="*res://scripts/data/nameDatabase.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/resizable=false
+mouse_cursor/custom_image="res://assets/images/pawsor.png"
 
 [editor]
 
@@ -27,3 +36,7 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[gui]
+
+theme/custom_font="res://assets/ui/fonts/Hello Cute.ttf"

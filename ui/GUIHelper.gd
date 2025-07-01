@@ -2,7 +2,7 @@
 extends Node
 class_name GUIHelper
 
-const PlayerClan = preload("res://scripts/clan/playerClan.gd")
+const PlayerClan = preload("res://scripts/core/playerClan.gd")
 
 # Get the full name of a cat (prefix + suffix)
 static func getCatName(player_clan: PlayerClan, cat_id: int) -> String:
