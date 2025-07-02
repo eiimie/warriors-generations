@@ -23,9 +23,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 547.0
-offset_top = 47.0
+offset_top = 1.0
 offset_right = 1480.0
-offset_bottom = 1023.0
+offset_bottom = 1057.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_ej1vq")
@@ -40,10 +40,10 @@ axis_stretch_vertical = 1
 [node name="VBoxContainer2" type="VBoxContainer" parent="starclanMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.346195
-anchor_top = 0.648053
-anchor_right = 0.687422
-anchor_bottom = 0.724898
+anchor_left = 0.406217
+anchor_top = 0.446105
+anchor_right = 0.599143
+anchor_bottom = 0.706975
 offset_left = -95.0
 offset_top = -185.5
 offset_right = 95.0
@@ -71,12 +71,31 @@ text = "tabby"
 [node name="changeWhiteness" type="Button" parent="starclanMenu/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_qfnf1")
-text = "moderately white"
+text = "not white"
 
 [node name="changeEyeColour" type="Button" parent="starclanMenu/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_qfnf1")
-text = "green"
+text = "green eyes"
+
+[node name="changeLeather" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "black nose"
+
+[node name="changeLeather2" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "shorthaired"
+
+[node name="finishedButton" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 484.0
+offset_top = 939.0
+offset_right = 895.0
+offset_bottom = 1025.0
+theme = ExtResource("4_qfnf1")
+text = "i'm ready to play. save this leader!"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -95,10 +114,10 @@ text = "0000000000"
 
 [node name="newLeader_AllegianceDescription_Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 576.0
-offset_top = 424.0
-offset_right = 1439.0
-offset_bottom = 465.0
+offset_left = 656.0
+offset_top = 206.0
+offset_right = 1519.0
+offset_bottom = 247.0
 theme_override_colors/font_color = Color(0.1465, 0.0579143, 0.00260801, 1)
 text = "a grey tabby tom"
 horizontal_alignment = 1
@@ -114,10 +133,10 @@ horizontal_alignment = 1
 
 [node name="newLeaderName_Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 571.0
-offset_top = 357.0
-offset_right = 1444.0
-offset_bottom = 433.0
+offset_left = 644.0
+offset_top = 122.0
+offset_right = 1517.0
+offset_bottom = 198.0
 theme_override_colors/font_color = Color(0.158196, 0.0626182, 0.0129058, 1)
 theme_override_font_sizes/font_size = 30
 text = "Asterstar"
@@ -305,22 +324,23 @@ offset_bottom = 580.0
 max_value = 9.0
 
 [node name="catPortrait_LeaderInstance" parent="Control" instance=ExtResource("2_3mhf7")]
-offset_left = 1027.0
-offset_top = 251.0
-offset_right = 1027.0
-offset_bottom = 251.0
+offset_left = 890.0
+offset_top = 192.0
+offset_right = 890.0
+offset_bottom = 192.0
 scale = Vector2(2.04, 2.04)
 
 [node name="sexIcon" type="TextureRect" parent="."]
-offset_left = 1121.0
-offset_top = 388.0
-offset_right = 1185.0
-offset_bottom = 452.0
+offset_left = 1201.0
+offset_top = 345.0
+offset_right = 1265.0
+offset_bottom = 409.0
 scale = Vector2(0.559995, 0.559995)
 texture = ExtResource("6_uep0k")
 
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeSex" to="Control" method="_on_changeSexButton_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeColour" to="Control" method="_on_coatColourButton_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeWhiteness" to="Control" method="_on_changeWhiteness_pressed"]
 [connection signal="pressed" from="Control/confirmPrefix_Button" to="Control" method="_newLeader_on_setNewPrefix_button_pressed"]
 [connection signal="pressed" from="Control/confirmSex_Button" to="Control" method="_on_confirmSex_button_pressed"]
 [connection signal="pressed" from="Control/confirmColour_Button" to="Control" method="_on_confirmColour_button_pressed"]

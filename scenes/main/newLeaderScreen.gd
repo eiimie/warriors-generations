@@ -39,11 +39,11 @@ extends Control
 	{"id": 13, "name": "fawn tortie", "female_only": true},
 ]
 @onready var currentCoatIndex = 0
-@onready var coatColourLabel = $"../starclanMenu/VBoxContainer2/changeColour".text 
+@onready var coatColourLabel = $"../starclanMenu/VBoxContainer2/changeColour" 
 
 func updateCoatColourDisplay() -> void:
 	var coat = coatColours[currentCoatIndex]
-	coatColourLabel = coat["name"]
+	coatColourLabel.text = coat["name"]
 	var coatID = coatColours[currentCoatIndex]["id"]
 
 	# Reset some genes first
@@ -291,4 +291,14 @@ func _on_changeSexButton_pressed() -> void:
 	updateGeneticCode(0, str(sex))
 
 	
+	pass # Replace with function body.
+
+
+func _on_changeWhiteness_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	# not white : 
+	# slightly white : 
+	# moderately white :
+	# mostly white :  
+	# fully white : 9 
 	pass # Replace with function body.
