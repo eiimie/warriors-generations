@@ -21,6 +21,7 @@ AudioManager="*res://scenes/audio/audioManager.tscn"
 Global="*res://scripts/core/global.gd"
 PlayerClan="*res://scripts/core/playerClan.gd"
 nameDB="*res://scripts/data/nameDatabase.gd"
+Enums="*res://scripts/core/enums.gd"
 
 [display]
 

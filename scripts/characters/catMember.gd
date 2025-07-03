@@ -3,12 +3,9 @@ class_name Member
 
 var id: int 
 var name: String
-var sex: int
-# 0 = male, 1 = female
+var sex: int # 0 = male, 1 = female
 var age: int
-var rank: int
-# 0 = leader, 1 = kit, 2 = apprentice, 3 = warrior, 4 = medicine cat, 5 = deputy, 6 = elder
-# 7 = rogue, 8 = kittypet (hidden from user's sight)
+var rank: int # 0 = leader, 1 = kit, 2 = apprentice, 3 = warrior, 4 = medicine cat, 5 = deputy, 6 = elder
 var genetic_code: String
 var prefix: String
 var suffix: String
@@ -30,26 +27,38 @@ func getRoleName(rank) -> String:
 # returns pronouns
 func getSheHe(Member, pronoun) -> String:
 	# returns pronouns
-	# 0 = she / he
-	# 1 = her / him
-	# 2 = hers / his 
+	# 0 = subject, she/he/they
+	# 1 = object, her/him/them
+ 	# 2 = poss. adj., her/his/their
+	# 3 = poss. pronoun, hers/his/theirs
+	# 4 = reflexive, herself/himself/themself
 	match pronoun:
-		"she/he": 
-			if Member.sex == 0:
+		"0":
+			if Member.sex == "0":
 				return "he"
 			else:
 				return "she"
-		"her/him": 
-			if Member.sex == 0:
+		"1":
+			if Member.sex == "0":
 				return "him"
 			else:
 				return "her"
-		"hers/his": 
-			if Member.sex == 0:
+		"2":
+			if Member.sex == "0":
+				return "his"
+			else:
+				return "her"
+		"3": 
+			if Member.sex == "0":
 				return "his"
 			else:
 				return "hers"
-	return ("they/them/their")
+		"4":
+			if Member.sex == 0:
+				return "himself"
+			else:
+				return "herself"
+	return "they/them/their"
 
 # change prefix
 # change suffix

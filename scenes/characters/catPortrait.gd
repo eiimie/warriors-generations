@@ -4,6 +4,8 @@ extends Control
 @onready var base = $Node2D/baseColour
 @onready var pattern = $Node2D/pattern
 @onready var white = $Node2D/white
+@onready var eyes = $Node2D/eyes
+@onready var leather = $Node2D/leather
 
 func resetPortrait():
 	var sprite_container = $Node2D
@@ -13,7 +15,7 @@ func resetPortrait():
 
 func displayCat(geneticCode: String):
 	print("displayCat called with code: ", geneticCode)
-	if geneticCode.length() != 10:
+	if geneticCode.length() != 13:
 		print("Invalid genetic code passed to catPortrait.displayCat")
 		return
 	
@@ -25,6 +27,9 @@ func displayCat(geneticCode: String):
 	var tabbyGene = geneticCode[5]
 	var tabbyPattern = geneticCode[6]
 	var whiteness = geneticCode[9]
+	var leatherGene = geneticCode[10]
+	var eyePigment = geneticCode[11]
+	var eyeRefraction = geneticCode[12]
 
 	# set base coat
 	var baseTex = getBaseTexture(eumelanin, red, dilution, tabbyGene, tabbyPattern)
@@ -42,6 +47,13 @@ func displayCat(geneticCode: String):
 
 	# lineart always on top
 	lineart.texture = load("res://assets/art/cat/lineart/short.png")
+	
+	# set leather layer
+	print()
+	leather.texture = getLeatherColour(leatherGene)
+	print("Leather gene: ", leatherGene + ". Displaying ", leather.texture)
+	
+	eyes.texture = getEyeColour(eyePigment, eyeRefraction)
 
 
 func getBaseTexture(eumelanin, red, dilution, tabbyGene, tabbyPattern):
@@ -85,6 +97,7 @@ func getPatternTexture(tabbyGene, tabbyPattern):
 			return null
 
 func getWhiteTexture(whiteness):
+	print("Whiteness value received: ", whiteness, " (type: ", typeof(whiteness), ")")
 	match whiteness:
 		"0": return null
 		"1": return load("res://assets/art/cat/white/short_1.png")
@@ -92,6 +105,19 @@ func getWhiteTexture(whiteness):
 		"3": return load("res://assets/art/cat/white/short_3.png")
 		"4": return load("res://assets/art/cat/white/short_4.png")
 		"5": return load("res://assets/art/cat/white/short_5.png")
-		"6", "7", "8", "9": return load("res://assets/art/cat/white/short_6_7_8_9.png")
+		"6": return load("res://assets/art/cat/white/short_6_7_8_9.png")
+		"7": return load("res://assets/art/cat/white/short_6_7_8_9.png")
+		"8": return load("res://assets/art/cat/white/short_6_7_8_9.png")
+		"9": return load("res://assets/art/cat/white/short_6_7_8_9.png")
 		_:
 			return null
+
+func getEyeColour(eyePigment, eyeRefraction):
+	var eyePath = "res://assets/art/cat/eyecolour/%s%s.png" % [eyePigment, eyeRefraction]
+	return load(eyePath) as Texture
+
+func getLeatherColour(leatherCode: String) -> Texture:
+	var leatherColour = int(leatherCode)
+	print("-----------------", leatherCode)
+	var texturePath = "res://assets/art/cat/leather/%s.png" % Enums.LeatherColour.keys()[leatherColour].to_lower()
+	return load(texturePath)

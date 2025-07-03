@@ -2,8 +2,10 @@ extends Node
 
 class_name Genetics
 
+# I LOVE HWANG INHO SQUID GAME!!!!!!!!!!!!!!!!!!!!!!!!!
+
 # this class is to generate cats, generate offspring, 
-# generate Allegiances descriptions, and identify the appearance of a cat 
+# and identify the appearance of a cat 
 
 # dev note - consider updating the code to use constants for alleles?
 # e.g. const NON_DILUTE = "0"; const CARRIER = "1"; etc. etc.
@@ -95,7 +97,7 @@ static func ranGenCat_NotWeighted() -> String:
 	# silver (0 = silver. 1 = silver carry non silver. 2 = non silver.
 	# colour point (0 = not point. 1 = not point, carry point. 2 = point.
 	# ******************************************************************************************
-	
+
 	# white gene! 
 	# determines level of whiteness in a cat
 	# int from 0 to 9 where 0 = no white at all, and 9 = completely white! 
@@ -103,7 +105,51 @@ static func ranGenCat_NotWeighted() -> String:
 	var white = rng.randi_range(0,9)
 	newCatGeneticCode += str(white)
 	
+	# leather
+	var leather = determineLeatherColour(eumel, dilution, furRed)
+	newCatGeneticCode += str(leather)
+	
+	# now for eye colour
+	# this is determined by two axis - pigmentation and refraction
+	
+	var eyePigment = rng.randi_range(1, 9) # skip 0 - reserved for albino
+	var eyeRefraction = rng.randi_range(0, 6)
+	newCatGeneticCode += str(eyePigment) 
+	newCatGeneticCode += str(eyeRefraction) 
+	
 	return newCatGeneticCode
+
+static func determineLeatherColour(eumelanin: String, dilution: String, red: String) -> String:
+	# leathers being linked to specific coat colours...
+	# black = black leather
+	# blue = blue leather
+	# chocolate = darkbrown
+	# cinnamon = reddishbrown
+	# lilac = pink
+	# fawn = palefawn
+	# red = red
+	# cream = pink
+	
+	if dilution == "2":
+		# dilute
+		if red == "1": return str(Enums.LeatherColour.PINK) # cream
+		elif red == "2": return str(rng.randi_range(Enums.LeatherColour.PINK, Enums.LeatherColour.BLUE)) # dilute tortie
+		else:
+			match eumelanin:
+				"0", "1", "2": return str(Enums.LeatherColour.BLUE) # blue
+				"3", "4": return str(Enums.LeatherColour.PINK) # lilac
+				"5": return str(Enums.LeatherColour.PALEFAWN) #fawn
+	else: 
+		# NOT dilute
+		if red == "1": return str(Enums.LeatherColour.PINK) #red
+		elif red == "2": return str(rng.randi_range(Enums.LeatherColour.RED, Enums.LeatherColour.BLACK)) # tortie
+		else:
+			match eumelanin:
+				"0", "1", "2": return str(Enums.LeatherColour.BLACK) #black
+				"3", "4": return str(Enums.LeatherColour.DARKBROWN) # chocolate
+				"5": return str(Enums.LeatherColour.REDDISHBROWN) #cinnamon
+	print("Console: Unexpected genetic combo for leather. Defaulting to darkbrown")
+	return str(Enums.LeatherColour.DARKBROWN)
 
 static func ranGenCat_Weighted(weighting: String) -> String: 
 	var newCatGeneticCode = ""
@@ -197,9 +243,9 @@ static func inherit_50_50(rng: RandomNumberGenerator, option1, option2) -> Strin
 # returns offspringGeneticCode 
 static func generate_offspring(gen_code_father: String, gen_code_mother: String) -> String:
 	# validate genetic codes
-	var expected_length = 10  # change this if genetic code length changes
+	var expected_length = 13  # change this if genetic code length changes
 	if gen_code_father.length() < expected_length or gen_code_mother.length() < expected_length:
-		return "ERROR: Genetic codes are too short."
+		return "Console ERROR: Genetic codes given to catGeneration.generate_offspring are too short!"
 
 	var offspring_genetic_code = ""
 	var rng = RandomNumberGenerator.new()
@@ -436,18 +482,31 @@ static func generate_offspring(gen_code_father: String, gen_code_mother: String)
 	# 10% chance to deviate up
 	elif rng.randi_range(1, 100) >= 96 and max_val < 9:  # adjust 3 if higher max
 		white = max_val + 1
-
+	
 	offspring_genetic_code += str(white)
 	print("White is: ", white)
-
+	
+	# now for the leather....
+	var leather = determineLeatherColour(eumel, dilute, red)
+	offspring_genetic_code += leather
+	
+	# now for eye colour inheritance...
+	var p1_pigment = int(gen_code_father[11]) if gen_code_father.length() > 11 else 5
+	var p2_pigment = int(gen_code_mother[11]) if gen_code_mother.length() > 11 else 5
+	
+	# get parent refractions (default to 3 if not set)
+	var p1_refract = int(gen_code_father[12]) if gen_code_father.length() > 12 else 3
+	var p2_refract = int(gen_code_mother[12]) if gen_code_mother.length() > 12 else 3
+	
+	# 50% chance to inherit from either parent, with ±1 mutation
+	var pigment = rng.randi_range(p1_pigment - 1, p1_pigment + 1) if rng.randi_range(0, 1) == 0 else rng.randi_range(p2_pigment - 1, p2_pigment + 1)
+	var refract = rng.randi_range(p1_refract - 1, p1_refract + 1) if rng.randi_range(0, 1) == 0 else rng.randi_range(p2_refract - 1, p2_refract + 1)
+	
+	# clamp to valid ranges (pigment 1-9, refraction 0-6)
+	pigment = clamp(pigment, 1, 9)
+	refract = clamp(refract, 0, 6)
+	
+	# append to genetic code
+	offspring_genetic_code += str(pigment) + str(refract)
 
 	return offspring_genetic_code
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

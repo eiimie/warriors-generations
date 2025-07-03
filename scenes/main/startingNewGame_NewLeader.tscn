@@ -73,20 +73,14 @@ layout_mode = 2
 theme = ExtResource("4_qfnf1")
 text = "not white"
 
-[node name="changeEyeColour" type="Button" parent="starclanMenu/VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("4_qfnf1")
-text = "green eyes"
-
-[node name="changeLeather" type="Button" parent="starclanMenu/VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("4_qfnf1")
-text = "black nose"
-
-[node name="changeLeather2" type="Button" parent="starclanMenu/VBoxContainer2"]
+[node name="changeFurLength" type="Button" parent="starclanMenu/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_qfnf1")
 text = "shorthaired"
+
+[node name="changeEyeColourSlider" type="HSlider" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+max_value = 62.0
 
 [node name="finishedButton" type="Button" parent="starclanMenu"]
 layout_mode = 2
@@ -95,7 +89,26 @@ offset_top = 939.0
 offset_right = 895.0
 offset_bottom = 1025.0
 theme = ExtResource("4_qfnf1")
-text = "i'm ready to play. save this leader!"
+text = "I'm ready to play. Save this leader!"
+
+[node name="finishedButton2" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 38.0
+offset_top = 937.0
+offset_right = 220.0
+offset_bottom = 1023.0
+theme = ExtResource("4_qfnf1")
+text = "Randomise"
+
+[node name="Label" type="Label" parent="starclanMenu"]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 858.0
+offset_right = 891.0
+offset_bottom = 955.0
+text = "note: this button will reset genetically impossible traits (like male torties)!"
+autowrap_mode = 2
+text_overrun_behavior = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -145,10 +158,10 @@ vertical_alignment = 1
 
 [node name="userInsertNewLeaderPrefix_TextEdit" type="LineEdit" parent="Control"]
 layout_mode = 0
-offset_left = 214.0
-offset_top = 330.0
-offset_right = 362.0
-offset_bottom = 379.0
+offset_left = 213.0
+offset_top = 325.0
+offset_right = 361.0
+offset_bottom = 374.0
 text = "Aster"
 
 [node name="newLeader_pickSex_Dropdown" type="OptionButton" parent="Control"]
@@ -331,16 +344,21 @@ offset_bottom = 192.0
 scale = Vector2(2.04, 2.04)
 
 [node name="sexIcon" type="TextureRect" parent="."]
-offset_left = 1201.0
-offset_top = 345.0
-offset_right = 1265.0
-offset_bottom = 409.0
+offset_left = 1205.0
+offset_top = 396.0
+offset_right = 1269.0
+offset_bottom = 460.0
 scale = Vector2(0.559995, 0.559995)
 texture = ExtResource("6_uep0k")
 
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeSex" to="Control" method="_on_changeSexButton_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeColour" to="Control" method="_on_coatColourButton_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeTabby" to="Control" method="_on_changeTabbyBtn_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeWhiteness" to="Control" method="_on_changeWhiteness_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeFurLength" to="Control" method="_on_changeFurLengthBtn_pressed"]
+[connection signal="value_changed" from="starclanMenu/VBoxContainer2/changeEyeColourSlider" to="Control" method="_on_changeEyeColour_slider_value_changed"]
+[connection signal="pressed" from="starclanMenu/finishedButton" to="Control" method="_on_finishedCreatingButton_pressed"]
+[connection signal="pressed" from="starclanMenu/finishedButton2" to="Control" method="_on_finishedCreatingButton_pressed"]
 [connection signal="pressed" from="Control/confirmPrefix_Button" to="Control" method="_newLeader_on_setNewPrefix_button_pressed"]
 [connection signal="pressed" from="Control/confirmSex_Button" to="Control" method="_on_confirmSex_button_pressed"]
 [connection signal="pressed" from="Control/confirmColour_Button" to="Control" method="_on_confirmColour_button_pressed"]

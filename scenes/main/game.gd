@@ -15,7 +15,7 @@ func _ready():
 	
 	var allCats = clan.getAllCats()
 	for cat in allCats:
-		var memberDisplay = preload("res://scenes/memberDisplay.tscn").instantiate()
+		var memberDisplay = preload("res://scenes/characters/memberDisplay.tscn").instantiate()
 		#memberDisplay.displayMember(cat)
 		clanMembersDisplay.add_child(memberDisplay)
 	
@@ -46,7 +46,7 @@ func refreshAllCatDisplays():
 	
 	# add all again
 	for cat in clan.getAllCats():
-		var memberDisplay = preload("res://scenes/memberDisplay.tscn").instantiate()
+		var memberDisplay = preload("res://scenes/characters/memberDisplay.tscn").instantiate()
 		memberDisplay.call_deferred("displayMember", cat)
 		clanMembersDisplay.add_child(memberDisplay)
 	
@@ -73,7 +73,7 @@ func _on_nextMoonButton_pressed():
 
 func displayClanMembers(clan: Array):
 	for member in clan: 
-		var card = preload("res://scenes/memberDisplay.tscn").instantiate()
+		var card = preload("res://scenes/characters/memberDisplay.tscn").instantiate()
 		card.set_data(member)
 		clanMembersDisplay.add_child(card)
 

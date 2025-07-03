@@ -11,15 +11,39 @@ extends Control
 @onready var tabbyButton = $newLeader_pickIfTabby_Dropdown
 @onready var isTabby = $newLeader_pickIfTabby_Dropdown
 @onready var chosenWhite = $whitenessSlider_Slider
-@onready var geneticCode = "0021020000"
+@onready var geneticCode = "0021020000000"
 
 # sex icon
 @onready var sexIcon = $"../sexIcon"
 @onready var sex = 0 # default is male 
 @onready var sexText = $"../starclanMenu/VBoxContainer2/changeSex"
 
+# call to catGeneration.gd because a function of it needs to be used when
+# changing a leader's base colour (specifically when changing their leather)
+@onready var genetics = preload("res://scripts/characters/catGeneration.gd")
+
 # cat portrait initialisation 
 @onready var portrait = $catPortrait_LeaderInstance
+
+# get eyes ready
+const EYE_PIGMENT = 11 
+const EYE_REFRACTION = 12
+
+# get whiteness ready
+@onready var whitenessBtn = $"../starclanMenu/VBoxContainer2/changeWhiteness"
+@onready var currentWhiteIndex = 0
+@onready var whitenessLevels = [
+	{"id": 0, "name": "no white"},
+	{"id": 1, "name": "slightly white"},
+	{"id": 2, "name": "slightly white"},
+	{"id": 3, "name": "moderately white"},
+	{"id": 4, "name": "moderately white"},
+	{"id": 5, "name": "moderately white"},
+	{"id": 6, "name": "mostly white"},
+	{"id": 7, "name": "mostly white"},
+	{"id": 8, "name": "mostly white"},
+	{"id": 9, "name": "fully white"},
+]
 
 # get coat colours ready
 @onready var coatColours = [
@@ -40,6 +64,14 @@ extends Control
 ]
 @onready var currentCoatIndex = 0
 @onready var coatColourLabel = $"../starclanMenu/VBoxContainer2/changeColour" 
+
+# tabby option initialisation:
+var tabbyOptions = [
+	{"name": "Solid", "id": 0},
+	{"name": "Tabby", "id": 2}
+]
+
+@onready var currentTabbyIndex = 0
 
 func updateCoatColourDisplay() -> void:
 	var coat = coatColours[currentCoatIndex]
@@ -117,8 +149,14 @@ func updateCoatColourDisplay() -> void:
 			_:
 				# default fallback - black
 				updateGeneticCode(2, "0")
-	
-	# update catPortrait
+	print("Final genetic code before leather calculation: ", geneticCode)
+	var eumelanin = geneticCode[2]
+	var dilution = geneticCode[4]
+	var red = geneticCode[3]
+	print("Using eumelanin: ", eumelanin, ", dilution: ", dilution, ", red: ", red)
+	var newLeather = genetics.determineLeatherColour(eumelanin, dilution, red)
+	print("Calculated leather color: ", newLeather)
+	updateGeneticCode(10, str(newLeather))
 
 func validateCoatForSex() -> void:
 	if sex == 0 and coatColours[currentCoatIndex]["female_only"]:
@@ -144,7 +182,7 @@ func _ready():
 	leaderCat.sex = 0
 	leaderCat.age = randi_range(13,20)
 	leaderCat.rank = 0
-	leaderCat.genetic_code = "0021020000"
+	leaderCat.genetic_code = "0021020000000"
 	leaderCat.prefix = "Aster"
 	leaderCat.suffix = "star"
 	leaderCat.name = leaderCat.prefix + leaderCat.suffix
@@ -226,6 +264,13 @@ func _on_confirmColour_button_pressed() -> void:
 				updateGeneticCode(2, "3") # set eumel to brown
 				updateGeneticCode(4, "2") # set to dilute
 				updateGeneticCode(3, "2") # set to tortie
+	# update leather colour based on pelt colour...
+	var eumelanin = geneticCode[2]
+	var dilution = geneticCode[4]
+	var red = geneticCode[3]
+	var newLeather = genetics.determineLeatherColour(eumelanin, dilution, red)
+	updateGeneticCode(10, str(newLeather))
+	print("----------- New leather coloUr: ", newLeather)
 
 func _on_confirm_ifTabby_button_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
@@ -296,9 +341,76 @@ func _on_changeSexButton_pressed() -> void:
 
 func _on_changeWhiteness_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
-	# not white : 
-	# slightly white : 
-	# moderately white :
-	# mostly white :  
+	
+	# first, reset previous white value 
+	updateGeneticCode(9, "0")
+	# not white : 0
+	# slightly white : 1, 2 
+	# moderately white : 3, 4, 5
+	# mostly white :  6, 7, 8 
 	# fully white : 9 
-	pass # Replace with function body.
+	
+	currentWhiteIndex = (currentWhiteIndex + 1) % whitenessLevels.size()
+	
+	# update button text to whatever is currently selected
+	var currentWhite = whitenessLevels[currentWhiteIndex]
+	whitenessBtn.text = currentWhite["name"]
+	var whiteID = whitenessLevels[currentWhiteIndex]["id"]
+	
+	var whiteStartIndex = currentWhiteIndex
+	
+	# change button text 
+	match whiteID:
+		"0": 
+			whitenessBtn.text = "not white"
+		"1", "2":
+			whitenessBtn.text = "slightly white"
+		"3", "4", "5":
+			whitenessBtn.text = "moderately white"
+		"6", "7", "8":
+			whitenessBtn.text = "mostly white"
+		"9":
+			whitenessBtn.text = "fully white"
+	updateGeneticCode(9, str(whiteID)) # update genetic code with new whiteness value
+
+
+func _on_finishedCreatingButton_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	# confirm all options
+	leaderCat.name = leaderCat.prefix + leaderCat.suffix
+	
+	Global.leaderCat = leaderCat
+	
+	get_tree().change_scene_to_file("res://scenes/main/game.tscn")
+	AudioManager.get_node("pageTurn").play() #play page turn noise
+
+
+func _on_changeTabbyBtn_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	# cycle thru tabby options
+	currentTabbyIndex = (currentTabbyIndex + 1) % tabbyOptions.size()
+	
+	# update button text to current option name
+	$"../starclanMenu/VBoxContainer2/changeTabby".text = tabbyOptions[currentTabbyIndex]["name"]
+	
+	# update genetic code with current option 
+	updateGeneticCode(5, str(tabbyOptions[currentTabbyIndex]["id"]))
+
+func _on_changeEyeColourBtn_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+
+func _on_changeFurLengthBtn_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+
+
+func _on_changeEyeColour_slider_value_changed(value: float) -> void:	
+	var index = int(round(value))
+	index = clamp(index, 0, 62)
+	
+	# convert index into pigment and refraction 
+	var pigment: int = (index / 7) + 1 # 9 total pigment levels 
+	var refraction: int = index % 7 # modulo. 7 total levels
+	
+	#update genetic code 
+	updateGeneticCode(EYE_PIGMENT, str(pigment))
+	updateGeneticCode(EYE_REFRACTION, str(refraction))
