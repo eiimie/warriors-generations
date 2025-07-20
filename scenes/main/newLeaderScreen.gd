@@ -67,8 +67,8 @@ const EYE_REFRACTION = 12
 
 # tabby option initialisation:
 var tabbyOptions = [
-	{"name": "Solid", "id": 0},
-	{"name": "Tabby", "id": 2}
+	{"name": "solid", "id": 0},
+	{"name": "tabby", "id": 2}
 ]
 
 @onready var currentTabbyIndex = 0
@@ -191,8 +191,7 @@ func _ready():
 	leaderCat.prefix = "Aster"
 	leaderCat.suffix = "star"
 	leaderCat.name = leaderCat.prefix + leaderCat.suffix
-	
-	updateSexTexture()
+
 
 func _process(delta: float) -> void:
 	$DEBUGDELETELATER_GENETICCODE.text = geneticCode
@@ -444,6 +443,9 @@ func _on_randomise_button_pressed() -> void:
 	sex = randi_range(0,1)
 	leaderCat.sex = sex
 	updateGeneticCode(0, str(sex))
+	sexIcon.texture = preload("res://assets/images/maleSex.png") if sex == 0 else preload("res://assets/images/femaleSex.png")
+	sexText.text = "male" if sex == 0 else "female"
+
 	
 	# randomise coat colour 
 	var validCoats = coatColours.filter(func(c): return not c["female_only"] or sex == 1)
@@ -515,24 +517,14 @@ func _on_randomisePrefixButton_pressed() -> void:
 	leaderCat.prefix = nameDB.randomPrefix(Appearance.describeThisCatsAppearance(leaderCat.genetic_code))
 	$newLeaderPrefix_textEdit.text = leaderCat.prefix
 
-func _on_changeSex_button_pressed() -> void:
-	AudioManager.get_node("buttonClick").play()
-	var currentSex = int(geneticCode[Enums.GenePosition.SEX])
-	var newSex = 1 - currentSex
-	updateGeneticCode(Enums.GenePosition.SEX, str(newSex))
+#func _on_changeSex_button_pressed() -> void:
+	#AudioManager.get_node("buttonClick").play()
+	#var currentSex = int(geneticCode[Enums.GenePosition.SEX])
+	#var newSex = 1 - currentSex
+	#updateGeneticCode(Enums.GenePosition.SEX, str(newSex))
 	
 	# update the leaderCat object
-	leaderCat.sex = newSex
+	#leaderCat.sex = newSex
 	
 	# validate coat for new sex (in case switching from female to male with tortie coat)
-	validateCoatForSex()
-	
-	updateSexTexture()
-
-
-func updateSexTexture():
-	var sex = int(leaderCat.genetic_code[Enums.GenePosition.SEX])
-	if sex == 0:
-		sexToggleBtn.texture_normal = maleIcon
-	else:
-		sexToggleBtn.texture_normal = femaleIcon
+	#validateCoatForSex()

@@ -1,11 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf1a4xmw731qo"]
+[gd_scene load_steps=10 format=3 uid="uid://cf1a4xmw731qo"]
 
 [ext_resource type="Texture2D" uid="uid://bf3xkytqjsi1l" path="res://assets/art/Art by Tiziano Zhou - Placeholder DELETE LATER DO NOT USE IN RELEASE.jpg" id="1_76bhb"]
 [ext_resource type="Script" path="res://scenes/main/newLeaderScreen.gd" id="1_jxsny"]
 [ext_resource type="PackedScene" uid="uid://bj5yfd4huc0bl" path="res://scenes/characters/catPortrait.tscn" id="2_3mhf7"]
 [ext_resource type="Texture2D" uid="uid://babo7xgvs01ah" path="res://assets/ui/starclanGuiBox.png" id="3_ej1vq"]
 [ext_resource type="Theme" uid="uid://ro4pnv2rc2x7" path="res://assets/ui/themes and styleboxes/defaultTheme.tres" id="4_qfnf1"]
+[ext_resource type="Texture2D" uid="uid://dfk8mcyytqooj" path="res://assets/ui/ui_menuButton_darkBrown.png" id="5_bu48f"]
 [ext_resource type="Texture2D" uid="uid://ecxgcskpbghw" path="res://assets/images/maleSex.png" id="6_uep0k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k32la"]
+texture = ExtResource("5_bu48f")
+texture_margin_left = 32.0
+texture_margin_right = 27.0
+
+[sub_resource type="Theme" id="Theme_hf772"]
+LineEdit/colors/font_color = Color(0.109846, 0.0664173, 0.0297007, 1)
+LineEdit/styles/normal = SubResource("StyleBoxTexture_k32la")
 
 [node name="Node2D" type="Node2D"]
 
@@ -119,15 +129,6 @@ text = "note: this button will reset genetically impossible traits (like male to
 autowrap_mode = 2
 text_overrun_behavior = 2
 
-[node name="changeSexButton_ImplementLater" type="TextureButton" parent="starclanMenu"]
-visible = false
-layout_mode = 0
-offset_left = 165.0
-offset_top = 303.0
-offset_right = 198.0
-offset_bottom = 339.0
-stretch_mode = 0
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -168,18 +169,19 @@ horizontal_alignment = 1
 
 [node name="newLeaderPrefix_textEdit" type="LineEdit" parent="Control"]
 layout_mode = 0
-offset_left = 835.0
-offset_top = 117.0
-offset_right = 1090.0
-offset_bottom = 201.0
+offset_left = 816.0
+offset_top = 120.0
+offset_right = 1082.0
+offset_bottom = 204.0
+theme = SubResource("Theme_hf772")
 theme_override_font_sizes/font_size = 30
 
 [node name="newLeaderSuffix_Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1100.0
-offset_top = 122.0
-offset_right = 1197.0
-offset_bottom = 198.0
+offset_left = 1081.0
+offset_top = 117.0
+offset_right = 1178.0
+offset_bottom = 193.0
 theme_override_colors/font_color = Color(0.158196, 0.0626182, 0.0129058, 1)
 theme_override_font_sizes/font_size = 30
 text = "star"
@@ -422,7 +424,6 @@ texture = ExtResource("6_uep0k")
 [connection signal="pressed" from="starclanMenu/finishedButton" to="Control" method="_on_finishedCreatingButton_pressed"]
 [connection signal="pressed" from="starclanMenu/randomiseButton" to="Control" method="_on_randomise_button_pressed"]
 [connection signal="pressed" from="starclanMenu/randomisePrefixButton" to="Control" method="_on_randomisePrefixButton_pressed"]
-[connection signal="pressed" from="starclanMenu/changeSexButton_ImplementLater" to="Control" method="_on_changeSex_button_pressed"]
 [connection signal="text_submitted" from="Control/newLeaderPrefix_textEdit" to="Control" method="_on_prefixInput_text_submitted"]
 [connection signal="pressed" from="Control/confirmPrefix_Button" to="Control" method="_newLeader_on_setNewPrefix_button_pressed"]
 [connection signal="pressed" from="Control/confirmSex_Button" to="Control" method="_on_confirmSex_button_pressed"]
