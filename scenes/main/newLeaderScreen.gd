@@ -11,7 +11,7 @@ extends Control
 @onready var tabbyButton = $newLeader_pickIfTabby_Dropdown
 @onready var isTabby = $newLeader_pickIfTabby_Dropdown
 @onready var chosenWhite = $whitenessSlider_Slider
-@onready var geneticCode = "0021020000000"
+@onready var geneticCode = "0000220002186"
 
 # sex icon
 @onready var sexIcon = $"../sexIcon"
@@ -72,6 +72,11 @@ var tabbyOptions = [
 ]
 
 @onready var currentTabbyIndex = 0
+
+# sex toggle button texture initialisation
+@onready var sexToggleBtn := $"../starclanMenu/changeSexButton"
+var maleIcon = preload("res://assets/images/maleSex.png")
+var femaleIcon = preload("res://assets/images/femaleSex.png")
 
 func updateCoatColourDisplay() -> void:
 	var coat = coatColours[currentCoatIndex]
@@ -182,16 +187,21 @@ func _ready():
 	leaderCat.sex = 0
 	leaderCat.age = randi_range(13,20)
 	leaderCat.rank = 0
-	leaderCat.genetic_code = "0021020000000"
+	leaderCat.genetic_code = "0000220002186"
 	leaderCat.prefix = "Aster"
 	leaderCat.suffix = "star"
 	leaderCat.name = leaderCat.prefix + leaderCat.suffix
+	
+	updateSexTexture()
 
 func _process(delta: float) -> void:
 	$DEBUGDELETELATER_GENETICCODE.text = geneticCode
 	$newLeader_AllegianceDescription_Label.text = Appearance.describeThisCat(geneticCode)
 
 func updateGeneticCode(index: int, value: String) -> void:
+	#debug...
+	if index == 5: 
+		print("Tabby gene changing from ", geneticCode[5], "to ", value)
 	geneticCode = geneticCode.substr(0, index) + value + geneticCode.substr(index + 1)
 	portrait.displayCat(geneticCode)
 	leaderCat.genetic_code = geneticCode
@@ -319,7 +329,7 @@ func _on_coatColourButton_pressed() -> void:
 		break
 	if found:
 		updateCoatColourDisplay()
-
+	updateGeneticCode(5, str(tabbyOptions[currentTabbyIndex]["id"]))
 
 func _on_changeSexButton_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
@@ -387,6 +397,15 @@ func _on_finishedCreatingButton_pressed() -> void:
 
 func _on_changeTabbyBtn_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
+	
+	# first check if cat is RED or CREAM - must always be tabby if they are!
+	var red = geneticCode[3]
+	if red == "1":
+		# not tabby
+		currentTabbyIndex = 1 
+		updateGeneticCode(5, "2")
+		$"../starclanMenu/VBoxContainer2/changeTabby".text = tabbyOptions[1]["name"]
+		return
 	# cycle thru tabby options
 	currentTabbyIndex = (currentTabbyIndex + 1) % tabbyOptions.size()
 	
@@ -414,3 +433,106 @@ func _on_changeEyeColour_slider_value_changed(value: float) -> void:
 	#update genetic code 
 	updateGeneticCode(EYE_PIGMENT, str(pigment))
 	updateGeneticCode(EYE_REFRACTION, str(refraction))
+
+
+func _on_randomise_button_pressed() -> void:
+	# randomise everything about leader - excluding name
+	# so sex, appearance
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	
+	# randomise sex
+	sex = randi_range(0,1)
+	leaderCat.sex = sex
+	updateGeneticCode(0, str(sex))
+	
+	# randomise coat colour 
+	var validCoats = coatColours.filter(func(c): return not c["female_only"] or sex == 1)
+	var randomCoat = validCoats[randi_range(0, validCoats.size() - 1)]
+	for i in range(coatColours.size()):
+		if coatColours[i]["id"] == randomCoat["id"]:
+			currentCoatIndex = i
+			break
+	updateCoatColourDisplay()
+	#_on_confirmColour_button_pressed()
+	
+	# randomise tabby
+	currentTabbyIndex = randi_range(0, tabbyOptions.size() - 1)
+	var tabbyID = tabbyOptions[currentTabbyIndex]["id"]
+	updateGeneticCode(5, str(tabbyID))
+	$"../starclanMenu/VBoxContainer2/changeTabby".text = tabbyOptions[currentTabbyIndex]["name"]
+	
+	# randomise whiteness level
+	var weighted_white_ids = [
+		0, 0, 0, 0,      # no white (common)
+		1, 1, 1,         # slightly white
+		2, 2,            # slightly white
+		3, 3,            # moderately white
+		4,               # moderately white
+		5,               # moderately white
+		6,               # mostly white
+		7,               # mostly white
+		8,               # mostly white
+		9                # fully white (very rare)
+	]
+
+	var whiteID = weighted_white_ids[randi_range(0, weighted_white_ids.size() - 1)]
+
+	# Now find the index in `whitenessLevels` that matches this ID
+	for i in range(whitenessLevels.size()):
+		if whitenessLevels[i]["id"] == whiteID:
+			currentWhiteIndex = i
+			break
+
+	updateGeneticCode(9, str(whiteID))
+	whitenessBtn.text = whitenessLevels[currentWhiteIndex]["name"]
+	
+	# randomise eye colour
+	var index = randi_range(0, 62)
+	var pigment: int = (index / 7) + 1 
+	var refraction: int = index % 7 
+	updateGeneticCode(EYE_PIGMENT, str(pigment))
+	updateGeneticCode(EYE_REFRACTION, str(refraction))
+	
+	leaderCat.prefix = nameDB.randomPrefix(Appearance.describeThisCatsAppearance(leaderCat.genetic_code))
+	$newLeaderPrefix_textEdit.text = leaderCat.prefix
+
+
+func _on_prefixInput_text_submitted(newPrefix: String) -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	newPrefix = newPrefix.strip_edges()
+	if newPrefix == "":
+		return # ignore empty input
+	
+	# format the new prefix correctly 
+	newPrefix = newPrefix[0].to_upper() + newPrefix.substr(1).to_lower()
+	
+	# save as new prefix
+	leaderCat.prefix = newPrefix
+	print("Debug: new name is", newPrefix + "star. Yippee!")
+
+func _on_randomisePrefixButton_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	leaderCat.prefix = nameDB.randomPrefix(Appearance.describeThisCatsAppearance(leaderCat.genetic_code))
+	$newLeaderPrefix_textEdit.text = leaderCat.prefix
+
+func _on_changeSex_button_pressed() -> void:
+	AudioManager.get_node("buttonClick").play()
+	var currentSex = int(geneticCode[Enums.GenePosition.SEX])
+	var newSex = 1 - currentSex
+	updateGeneticCode(Enums.GenePosition.SEX, str(newSex))
+	
+	# update the leaderCat object
+	leaderCat.sex = newSex
+	
+	# validate coat for new sex (in case switching from female to male with tortie coat)
+	validateCoatForSex()
+	
+	updateSexTexture()
+
+
+func updateSexTexture():
+	var sex = int(leaderCat.genetic_code[Enums.GenePosition.SEX])
+	if sex == 0:
+		sexToggleBtn.texture_normal = maleIcon
+	else:
+		sexToggleBtn.texture_normal = femaleIcon

@@ -22,6 +22,7 @@ Global="*res://scripts/core/global.gd"
 PlayerClan="*res://scripts/core/playerClan.gd"
 nameDB="*res://scripts/data/nameDatabase.gd"
 Enums="*res://scripts/core/enums.gd"
+appearanceManager="*res://scripts/characters/appearanceManager.gd"
 
 [display]
 

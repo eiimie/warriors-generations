@@ -1,0 +1,190 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf1a4xmw731qo"]
+
+[ext_resource type="Texture2D" uid="uid://bf3xkytqjsi1l" path="res://assets/art/Art by Tiziano Zhou - Placeholder DELETE LATER DO NOT USE IN RELEASE.jpg" id="1_76bhb"]
+[ext_resource type="Script" path="res://scenes/main/newLeaderScreen.gd" id="1_jxsny"]
+[ext_resource type="PackedScene" uid="uid://bj5yfd4huc0bl" path="res://scenes/characters/catPortrait.tscn" id="2_3mhf7"]
+[ext_resource type="Texture2D" uid="uid://babo7xgvs01ah" path="res://assets/ui/starclanGuiBox.png" id="3_ej1vq"]
+[ext_resource type="Theme" uid="uid://ro4pnv2rc2x7" path="res://assets/ui/themes and styleboxes/defaultTheme.tres" id="4_qfnf1"]
+[ext_resource type="Texture2D" uid="uid://ecxgcskpbghw" path="res://assets/images/maleSex.png" id="6_uep0k"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="img_backgroundImage" type="TextureRect" parent="."]
+offset_left = 1.0
+offset_top = -5.0
+offset_right = 1921.0
+offset_bottom = 1116.0
+texture = ExtResource("1_76bhb")
+
+[node name="starclanMenu" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 547.0
+offset_top = 1.0
+offset_right = 1480.0
+offset_bottom = 1057.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ej1vq")
+region_rect = Rect2(2.5, -1.64463, 503, 409.517)
+patch_margin_left = 27
+patch_margin_top = 87
+patch_margin_right = 37
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="starclanMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.406217
+anchor_top = 0.446105
+anchor_right = 0.599143
+anchor_bottom = 0.706975
+offset_left = -95.0
+offset_top = -185.5
+offset_right = 95.0
+offset_bottom = 185.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="changeSex" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "male"
+
+[node name="changeColour" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "grey"
+
+[node name="changeTabby" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "tabby"
+
+[node name="changeWhiteness" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "not white"
+
+[node name="changeFurLength" type="Button" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_qfnf1")
+text = "shorthaired"
+
+[node name="changeEyeColourSlider" type="HSlider" parent="starclanMenu/VBoxContainer2"]
+layout_mode = 2
+max_value = 62.0
+
+[node name="finishedButton" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 484.0
+offset_top = 939.0
+offset_right = 895.0
+offset_bottom = 1025.0
+theme = ExtResource("4_qfnf1")
+text = "I'm ready to play. Save this leader!"
+
+[node name="randomiseButton" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 38.0
+offset_top = 937.0
+offset_right = 220.0
+offset_bottom = 1023.0
+theme = ExtResource("4_qfnf1")
+text = "Randomise"
+
+[node name="randomisePrefixButton" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 649.0
+offset_top = 128.0
+offset_right = 895.0
+offset_bottom = 214.0
+theme = ExtResource("4_qfnf1")
+text = "Randomise prefix"
+
+[node name="Label" type="Label" parent="starclanMenu"]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 858.0
+offset_right = 891.0
+offset_bottom = 955.0
+text = "note: this button will reset genetically impossible traits (like male torties)!"
+autowrap_mode = 2
+text_overrun_behavior = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jxsny")
+
+[node name="newLeader_AllegianceDescription_Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 837.0
+offset_top = 224.0
+offset_right = 1094.0
+offset_bottom = 265.0
+theme_override_colors/font_color = Color(0.1465, 0.0579143, 0.00260801, 1)
+text = "a grey tabby tom"
+horizontal_alignment = 1
+
+[node name="newLeaderPrefix_textEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_left = 835.0
+offset_top = 117.0
+offset_right = 1090.0
+offset_bottom = 201.0
+theme_override_font_sizes/font_size = 30
+
+[node name="newLeaderSuffix_Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 122.0
+offset_right = 1197.0
+offset_bottom = 198.0
+theme_override_colors/font_color = Color(0.158196, 0.0626182, 0.0129058, 1)
+theme_override_font_sizes/font_size = 30
+text = "star"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="describeNewLeader_Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -280.0
+offset_top = 15.0
+offset_right = -240.0
+offset_bottom = 56.0
+
+[node name="catPortrait_LeaderInstance" parent="Control" instance=ExtResource("2_3mhf7")]
+offset_left = 727.0
+offset_top = 188.0
+offset_right = 727.0
+offset_bottom = 188.0
+scale = Vector2(2.04, 2.04)
+
+[node name="sexIcon" type="TextureRect" parent="."]
+offset_left = 1204.0
+offset_top = 398.0
+offset_right = 1268.0
+offset_bottom = 462.0
+scale = Vector2(0.559995, 0.559995)
+texture = ExtResource("6_uep0k")
+
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeSex" to="Control" method="_on_changeSexButton_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeColour" to="Control" method="_on_coatColourButton_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeTabby" to="Control" method="_on_changeTabbyBtn_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeWhiteness" to="Control" method="_on_changeWhiteness_pressed"]
+[connection signal="pressed" from="starclanMenu/VBoxContainer2/changeFurLength" to="Control" method="_on_changeFurLengthBtn_pressed"]
+[connection signal="value_changed" from="starclanMenu/VBoxContainer2/changeEyeColourSlider" to="Control" method="_on_changeEyeColour_slider_value_changed"]
+[connection signal="pressed" from="starclanMenu/finishedButton" to="Control" method="_on_finishedCreatingButton_pressed"]
+[connection signal="pressed" from="starclanMenu/randomiseButton" to="Control" method="_on_randomise_button_pressed"]
+[connection signal="pressed" from="starclanMenu/randomisePrefixButton" to="Control" method="_on_randomisePrefixButton_pressed"]
+[connection signal="text_submitted" from="Control/newLeaderPrefix_textEdit" to="Control" method="_on_prefixInput_text_submitted"]

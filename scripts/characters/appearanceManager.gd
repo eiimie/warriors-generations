@@ -135,21 +135,17 @@ static func describeThisCat(genCode: String) -> String:
 # a method to return variable of coat colour/tabby/tortie or calico status from a given genetic code
 # returns catAppearanceDescription
 static func describeThisCatsAppearance(genCode: String) -> String:
-	# validate
-	var expected_length = 10  
-	if genCode.length() < expected_length:
-		return "ERROR: Genetic code too short."
 	# appearances: white, bi, tri, brown, black, red, golden, pattern
 	
 	# Initialize the appearance description variable
 	var catAppearanceDescription
 	
 	# Extract relevant parts from the genetic code
-	var dilution = genCode[4]
-	var red = genCode[3]
-	var eumelanin = genCode[2]
-	var tabby = genCode[5]
-	var whiteness = genCode[9]
+	var dilution = genCode[Enums.GenePosition.DILUTION]
+	var red = genCode[Enums.GenePosition.RED]
+	var eumelanin = genCode[Enums.GenePosition.EUMELANIN]
+	var tabby = genCode[Enums.GenePosition.TABBY]
+	var whiteness = genCode[Enums.GenePosition.WHITE]
 	
 	# Check if the cat is white
 	if whiteness == "7" or whiteness == "8" or whiteness == "9":
@@ -186,7 +182,10 @@ static func describeThisCatsAppearance(genCode: String) -> String:
 							if tabby == "2":
 								catAppearanceDescription = "pattern"  # Tabby pattern
 							else:
-								catAppearanceDescription = "black"  # Black
+								if dilution == "2":
+									catAppearanceDescription = "blue"
+								else:
+									catAppearanceDescription = "black"  # Black
 				"1":
 					# Red (ginger)
 					catAppearanceDescription = "red"  # Red (ginger)
@@ -209,12 +208,18 @@ static func describeThisCatsAppearance(genCode: String) -> String:
 							"4":
 								catAppearanceDescription = "brown"  # Chocolate
 							"0", "1", "2":
-								catAppearanceDescription = "black"  # Black
+								if dilution == "2":
+									catAppearanceDescription = "blue"
+								else:
+									catAppearanceDescription = "black"  # Black
 					"1":
-						catAppearanceDescription = "red"  # Red (ginger)
+						if dilution == "2":
+							catAppearanceDescription = "golden"
+						else:
+							catAppearanceDescription = "red"  # Red (ginger)
 					"2":
-						catAppearanceDescription = "golden"  # Golden (cream)
-	
+						catAppearanceDescription = "bi"  # Golden (cream)
+	print(catAppearanceDescription)
 	return catAppearanceDescription
 
 # a method to analyse genetic code

@@ -1,3 +1,6 @@
+#catPortrait - this is the image for cats that are generated based on their genetic codes
+# this code generates a catPortrait for a given genetic code.
+
 extends Control
 
 @onready var lineart = $Node2D/lineart
@@ -85,16 +88,15 @@ func getBaseTexture(eumelanin, red, dilution, tabbyGene, tabbyPattern):
 
 	return load("res://assets/art/cat/base/%s%s.png" % [base_name, colour])
 
-
 func getPatternTexture(tabbyGene, tabbyPattern):
-	if tabbyGene != "2":
+	if tabbyGene == "0":
 		return null
 
 	match tabbyPattern:
 		"2": return load("res://assets/art/cat/pattern/short_mackerel.png")
 		"1": return load("res://assets/art/cat/pattern/short_mackerel.png")
 		_:
-			return null
+			return load("res://assets/art/cat/pattern/short_mackerel.png")
 
 func getWhiteTexture(whiteness):
 	print("Whiteness value received: ", whiteness, " (type: ", typeof(whiteness), ")")
