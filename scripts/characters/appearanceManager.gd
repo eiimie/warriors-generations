@@ -17,7 +17,7 @@ static func describeThisCat(genCode: String) -> String:
 	var catDescription
 	
 	# first validate the argument
-	if genCode.length() != 10 and !genCode.is_valid_int():
+	if !genCode.is_valid_int():
 		# length is NOT 10 (invalid length) and IS NOT VALID INT (invalid)
 		return("INVALID GENETIC CODE.")
 	else:
@@ -41,6 +41,11 @@ static func describeThisCat(genCode: String) -> String:
 			catDescription += "white "
 		else:
 			# it doesn't! describe it normally
+			if whiteness == "0" or "1" or "2" or "3":
+				catDescription += "bicolour "
+			else:
+				catDescription = catDescription
+
 			if dilution != "2":
 				# cat is NON DILUTE
 				
@@ -66,11 +71,11 @@ static func describeThisCat(genCode: String) -> String:
 						# if less than 5 and a tabby, considered a torbie.
 						match eumelanin:
 							"0", "1", "2":
-								catDescription += "grey-cream " if dilution == "2" else "black-red "
+								catDescription += "grey  " if dilution == "2" else "black "
 							"3":
-								catDescription += "lilac-cream " if dilution == "2" else "brown-red "
+								catDescription += "lilac " if dilution == "2" else "brown "
 							"5":
-								catDescription += "fawn-cream " if dilution == "2" else "cinnamon-red "
+								catDescription += "fawn " if dilution == "2" else "brown "
 							_:
 								catDescription += "tortie "  # fallback
 
@@ -82,8 +87,6 @@ static func describeThisCat(genCode: String) -> String:
 							catDescription += "torbie "
 						else:
 							catDescription += "tortoiseshell "
-
-
 			else:
 				# cat is DILUTE
 				
@@ -100,10 +103,6 @@ static func describeThisCat(genCode: String) -> String:
 								catDescription += "lilac "
 							"0","1","2":
 								catDescription += "grey "
-						if tabby == "2":
-							# is tabby cat
-							catDescription += "tabby "
-						catDescription += ""
 					"1":
 						# red! considered a ginger tabby 
 						catDescription += "cream "

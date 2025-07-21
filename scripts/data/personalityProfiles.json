@@ -1,0 +1,74 @@
+{
+	"REFORMER": {
+		"description": "Principled, perfectionistic, and driven by a strong sense of right and wrong.",
+		"common_traits": ["strict", "organised", "critical", "disciplined", "moralistic"],
+		"mood_bias": "frustrated",
+		"strengths": ["responsible", "self-controlled", "idealistic"],
+		"weaknesses": ["judgemental", "rigid", "overly serious"],
+		"compatible_with": ["HELPER", "LOYALIST"]
+	},
+	"HELPER": {
+		"description": "Caring, empathetic, and eager to help others - even at their own detriment",
+		"common_traits": ["nurting", "clingy", "selfless", "supportive", "emotional"],
+		"mood_bias": "overwhelmed",
+		"strengths": ["warm", "generous", "loyal"],
+		"weaknesses": ["needy", "over-involved", "self-neglecting"],
+		"compatible_with": ["ACHIEVER", "PEACEMAKER"]
+	},
+	"ACHIEVER": {
+		"description": "Success-oreinted, image-conscious, and always aiming for excellence.",
+		"common_traits": ["ambitious", "competitve", "charismatic", "driven", "polish"],
+		"mood_bias": "anxious",
+		"strengths": ["motivated", "confident", "efficient"],
+		"weaknesses": ["vain", "workaholic", "approval seeking"],
+		"compatible_with": ["HELPER", "INDIVIDUALIST"]
+	},
+	"INDIVIDUALIST": {
+		"description": "Sensitive and introspective, often feeling different or misunderstood",
+		"common_traits": ["melancholic", "creative", "moody", "expressive", "private"],
+		"mood_bias": "moody",
+		"strengths": ["artistic", "empathetic", "original"],
+		"weaknesses": ["withdrawn", "dramatic", "self-absorbed"],
+		"compatible_with": ["INVESTIGATOR", "ACHIEVER"]
+	},
+	"INVESTIGATOR": {
+		"description": "Observant, cerebral, and private. They crave knowledge and autonomy.",
+		"common_traits": ["curious", "isolated", "quiet", "intellectual", "skeptical"],
+		"mood_bias": "detached",
+		"strengths": ["logical", "focused", "independent"],
+		"weaknesses": ["aloof", "secretive", "emotionally distant"],
+		"compatible_with": ["INDIVIDUALIST", "CHALLENGER"]
+	},
+	"LOYALIST": {
+		"description": "Security-focused and loyal to the end. Anxious but steadfast in their convictions.",
+		"common_traits": ["trusting", "cautious", "dutiful", "protective", "suspicious"],
+		"mood_bias": "worried",
+		"strengths": ["loyal", "reliable", "committed"],
+		"weaknesses": ["doubtful", "reactive", "defensive"],
+		"compatible_with": ["PEACEMAKER", "REFROMER"]
+	},
+	"ENTHUSIAST": {
+		"description": "Playful, spontaneous, and always looking for the next adventure.",
+		"common_traits": ["fun-loving", "restless", "talkative", "charming", "impulsive"],
+		"mood_bias": "excitable",
+		"strengths": ["optimistic", "creative", "engaging"],
+		"weaknesses": ["distracted", "overcommitted", "avoidant"],
+		"compatible_with": ["CHALLENGER", "REFORMER"]
+	},
+	"CHALLENGER": {
+		"description": "Assertive and protective, they value control and don't shy from conflict.",
+		"common_traits": ["dominant", "brash", "protective", "stubborn", "commanding"],
+		"mood_bias": "aggressive",
+		"strengths": ["strong", "decisive", "fearless"],
+		"weaknesses": ["controlling", "intimidating", "impulsive"],
+		"compatible_with": ["LOYALIST", "ENTHUSIAST"]
+	},
+	"PEACEMAKER": {
+		"description": "Easygoing and accepting, they avoid conflict and promote harmony.",
+		"common_traits": ["laidback", "agreeable", "passive", "content", "adaptable"],
+		"mood_bias": "apathetic",
+		"strengths": ["stable", "kind", "patient"],
+		"weaknesses": ["indecisive", "passive-aggressive", "conflict-avoidant"],
+		"compatible_with": ["HELPER", "LOYALIST"]
+	},
+}

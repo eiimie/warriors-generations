@@ -106,7 +106,7 @@ static func ranGenCat_NotWeighted() -> String:
 	newCatGeneticCode += str(white)
 	
 	# leather
-	var leather = determineLeatherColour(eumel, dilution, furRed)
+	var leather = determineLeatherColour(str(eumel), str(dilution), str(furRed))
 	newCatGeneticCode += str(leather)
 	
 	# now for eye colour

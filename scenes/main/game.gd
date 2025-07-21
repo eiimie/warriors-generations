@@ -1,6 +1,7 @@
 extends Control
 
 var moonCount = 0 
+#var leaderDisplay
 @onready var leaderDisplay = $leaderDisplay
 @onready var clanMembersDisplay = $ScrollContainer/clanMembersVBox
 var clan
@@ -9,9 +10,11 @@ var myLeader = Global.leaderCat
 
 func _ready():
 	clan = playerClan.new() # create an instance of the clan
+	#leaderDisplay = preload("res://scenes/characters/memberDisplay.tscn").instantiate()
+	#add_child(leaderDisplay)
 	updateMoonCounter()
 	myLeader.printInfo()
-	leaderDisplay.displayMember(myLeader)
+	leaderDisplay.call_deferred("displayMember", myLeader)
 	
 	var allCats = clan.getAllCats()
 	for cat in allCats:
@@ -19,22 +22,6 @@ func _ready():
 		#memberDisplay.displayMember(cat)
 		clanMembersDisplay.add_child(memberDisplay)
 	
-	# deubg - testing suffixes and prefixes
-	print("4 Random suffixes -- ")
-	for x in range(4):
-		print(Global.randomSuffix())
-	
-	print("Random prefixes -- ")
-	print("Black: ", Global.randomPrefix("black"))
-	print("Blue: ", Global.randomPrefix("blue"))
-	print("Brown: ", Global.randomPrefix("brown"))
-	print("Red: ", Global.randomPrefix("red"))
-	print("Golden: ", Global.randomPrefix("golden"))
-	print("Bi: ", Global.randomPrefix("bi"))
-	print("Tri: ", Global.randomPrefix("tri"))
-	print("Pattern: ", Global.randomPrefix("pattern"))
-	print("White: ", Global.randomPrefix("white"))
-
 # quick refresh the container displaying cat members
 func refreshAllCatDisplays():
 	print("All cats:", clan.getAllCats())
@@ -51,7 +38,7 @@ func refreshAllCatDisplays():
 		clanMembersDisplay.add_child(memberDisplay)
 	
 func updateMoonCounter():
-	$moonCounterLabel.text = "Moons: " + str(moonCount)
+	$moonCounterLabel.text = "Moon " + str(moonCount)
 	myLeader.age += 1
 	leaderDisplay.displayMember(myLeader)
 	clan.ageUpAllCats(clan)

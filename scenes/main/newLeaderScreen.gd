@@ -14,9 +14,8 @@ extends Control
 @onready var geneticCode = "0000220002186"
 
 # sex icon
-@onready var sexIcon = $"../sexIcon"
+@onready var sexIcon = $"../starclanMenu/changeSex/sexIcon"
 @onready var sex = 0 # default is male 
-@onready var sexText = $"../starclanMenu/VBoxContainer2/changeSex"
 
 # call to catGeneration.gd because a function of it needs to be used when
 # changing a leader's base colour (specifically when changing their leather)
@@ -337,7 +336,7 @@ func _on_changeSexButton_pressed() -> void:
 	sex = 1 if sex == 0 else 0 
 	
 	# update button text
-	sexText.text = "male" if sex == 0 else "female"
+	#sexText.text = "male" if sex == 0 else "female"
 	sexIcon.texture = preload("res://assets/images/maleSex.png") if sex == 0 else preload("res://assets/images/femaleSex.png")
 	
 	# update leader & genetic code
@@ -444,7 +443,7 @@ func _on_randomise_button_pressed() -> void:
 	leaderCat.sex = sex
 	updateGeneticCode(0, str(sex))
 	sexIcon.texture = preload("res://assets/images/maleSex.png") if sex == 0 else preload("res://assets/images/femaleSex.png")
-	sexText.text = "male" if sex == 0 else "female"
+	#sexText.text = "male" if sex == 0 else "female"
 
 	
 	# randomise coat colour 
@@ -528,3 +527,8 @@ func _on_randomisePrefixButton_pressed() -> void:
 	
 	# validate coat for new sex (in case switching from female to male with tortie coat)
 	#validateCoatForSex()
+
+func _on_mainMenu_goBackBtn_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	AudioManager.get_node("pageTurn").play() #play page turn noise
+	get_tree().change_scene_to_file("res://scenes/main/mainMenu.tscn")
