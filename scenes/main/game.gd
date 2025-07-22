@@ -3,7 +3,7 @@ extends Control
 var moonCount = 0 
 #var leaderDisplay
 @onready var leaderDisplay = $leaderDisplay
-@onready var clanMembersDisplay = $ScrollContainer/clanMembersVBox
+@onready var clanMembersDisplay = $clanView_uiBox/GridContainer
 var clan
 
 var myLeader = Global.leaderCat
@@ -19,7 +19,7 @@ func _ready():
 	var allCats = clan.getAllCats()
 	for cat in allCats:
 		var memberDisplay = preload("res://scenes/characters/memberDisplay.tscn").instantiate()
-		#memberDisplay.displayMember(cat)
+		memberDisplay.displayMember(cat)
 		clanMembersDisplay.add_child(memberDisplay)
 	
 # quick refresh the container displaying cat members
@@ -85,6 +85,7 @@ func _on_debug_addRandomCat_button_pressed() -> void:
 		
 	var cat = clan.addNewCatToClan(id, name, sex, age, rank, gen_code, prefix, suffix, isPregnant, pregProgress)
 	print("Added Cat: ", cat.name, " | GenCode: ", cat.genetic_code)
+	refreshAllCatDisplays()
 
 func _on_debug_checkClan_button_pressed() -> void:
 	print(clan.getAllCats())

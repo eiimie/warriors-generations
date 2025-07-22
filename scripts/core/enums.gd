@@ -12,6 +12,7 @@ enum Rank {
 	OUTSIDER
 }
 
+# in future, move towards using geneticEnums.gd instead, and adjust code as needed
 # enum-based interpretation of string-based genetic code:
 enum GenePosition { 
 	SEX = 0,
@@ -26,7 +27,8 @@ enum GenePosition {
 	WHITE = 9, 
 	LEATHER = 10,
 	EYE_PIGMENT = 11, # pigmentation axis (0-9, but 0 reserved for albinism)
-	EYE_REFRACTION = 12 # refraction axis (0-6)
+	EYE_REFRACTION = 12, # refraction axis (0-6)
+	FUR_VARIETY = 13 # 0 = midhair, 1 = longhair
 }
 
 # leather colours

@@ -18,21 +18,23 @@ func resetPortrait():
 
 func displayCat(geneticCode: String):
 	print("displayCat called with code: ", geneticCode)
-	if geneticCode.length() != 13:
+	if geneticCode.length() != 14:
 		print("Invalid genetic code passed to catPortrait.displayCat")
 		return
 	
-	#resetPortrait()
-
-	var eumelanin = geneticCode[2]
-	var red = geneticCode[3]
-	var dilution = geneticCode[4]
-	var tabbyGene = geneticCode[5]
-	var tabbyPattern = geneticCode[6]
-	var whiteness = geneticCode[9]
-	var leatherGene = geneticCode[10]
-	var eyePigment = geneticCode[11]
-	var eyeRefraction = geneticCode[12]
+	resetPortrait()
+	
+	var furLength = geneticCode[Enums.GenePosition.FUR_LENGTH]
+	var eumelanin = geneticCode[Enums.GenePosition.EUMELANIN]
+	var red = geneticCode[Enums.GenePosition.RED]
+	var dilution = geneticCode[Enums.GenePosition.DILUTION]
+	var tabbyGene = geneticCode[Enums.GenePosition.TABBY]
+	var tabbyPattern = geneticCode[Enums.GenePosition.TABBY_PATTERN]
+	var whiteness = geneticCode[Enums.GenePosition.WHITE]
+	var leatherGene = geneticCode[Enums.GenePosition.LEATHER]
+	var eyePigment = geneticCode[Enums.GenePosition.EYE_PIGMENT]
+	var eyeRefraction = geneticCode[Enums.GenePosition.EYE_REFRACTION]
+	var furVariety = geneticCode[Enums.GenePosition.FUR_VARIETY]
 
 	# set base coat
 	var baseTex = getBaseTexture(eumelanin, red, dilution, tabbyGene, tabbyPattern)
@@ -52,11 +54,11 @@ func displayCat(geneticCode: String):
 	lineart.texture = load("res://assets/art/cat/lineart/short.png")
 	
 	# set leather layer
-	print()
 	leather.texture = getLeatherColour(leatherGene)
-	print("Leather gene: ", leatherGene + ". Displaying ", leather.texture)
 	
 	eyes.texture = getEyeColour(eyePigment, eyeRefraction)
+	
+	lineart.texture = getLineart(furLength, furVariety)
 
 
 func getBaseTexture(eumelanin, red, dilution, tabbyGene, tabbyPattern):
@@ -123,3 +125,17 @@ func getLeatherColour(leatherCode: String) -> Texture:
 	print("-----------------", leatherCode)
 	var texturePath = "res://assets/art/cat/leather/%s.png" % Enums.LeatherColour.keys()[leatherColour].to_lower()
 	return load(texturePath)
+
+func getLineart(hairLength: String, furVariety: String) -> Texture:
+	print("getLineart called with hairlength: ", hairLength, "furVariety: ", furVariety)
+	match hairLength:
+		"2": 
+			# long hair
+			if furVariety == "0": 
+				# mid hair
+				return load("res://assets/art/cat/lineart/mid.png") as Texture
+			else:
+				return load("res://assets/art/cat/lineart/long.png") as Texture
+		_: 
+			# short hair 
+			return load("res://assets/art/cat/lineart/short.png") as Texture

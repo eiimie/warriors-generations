@@ -11,7 +11,7 @@ extends Control
 @onready var tabbyButton = $newLeader_pickIfTabby_Dropdown
 @onready var isTabby = $newLeader_pickIfTabby_Dropdown
 @onready var chosenWhite = $whitenessSlider_Slider
-@onready var geneticCode = "0000220002186"
+@onready var geneticCode = "00002200021860"
 
 # sex icon
 @onready var sexIcon = $"../starclanMenu/changeSex/sexIcon"
@@ -69,6 +69,14 @@ var tabbyOptions = [
 	{"name": "solid", "id": 0},
 	{"name": "tabby", "id": 2}
 ]
+
+var furLengthOptions = [
+	{"name": "shorthair"},
+	{"name": "midhair"},
+	{"name": "longhair"}
+]
+@onready var furLengthBtn = $"../starclanMenu/VBoxContainer2/changeFurLength"
+@onready var currentFurLengthIndex = 0
 
 @onready var currentTabbyIndex = 0
 
@@ -328,6 +336,7 @@ func _on_coatColourButton_pressed() -> void:
 	if found:
 		updateCoatColourDisplay()
 	updateGeneticCode(5, str(tabbyOptions[currentTabbyIndex]["id"]))
+	validateCat()
 
 func _on_changeSexButton_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
@@ -343,9 +352,7 @@ func _on_changeSexButton_pressed() -> void:
 	leaderCat.sex = sex
 	updateGeneticCode(0, str(sex))
 
-	
-	pass # Replace with function body.
-
+	validateCat()
 
 func _on_changeWhiteness_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
@@ -386,6 +393,7 @@ func _on_finishedCreatingButton_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
 	# confirm all options
 	leaderCat.name = leaderCat.prefix + leaderCat.suffix
+	validateCat()
 	
 	Global.leaderCat = leaderCat
 	
@@ -397,7 +405,7 @@ func _on_changeTabbyBtn_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
 	
 	# first check if cat is RED or CREAM - must always be tabby if they are!
-	var red = geneticCode[3]
+	var red = geneticCode[Enums.GenePosition.RED]
 	if red == "1":
 		# not tabby
 		currentTabbyIndex = 1 
@@ -412,13 +420,32 @@ func _on_changeTabbyBtn_pressed() -> void:
 	
 	# update genetic code with current option 
 	updateGeneticCode(5, str(tabbyOptions[currentTabbyIndex]["id"]))
+	validateCat()
 
 func _on_changeEyeColourBtn_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
 
 func _on_changeFurLengthBtn_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
-
+	#var furLengthOptions =
+	#{"name": "shorthair"},
+	#{"name": "midhair"},
+	#{"name": "longhair"}
+	currentFurLengthIndex = (currentFurLengthIndex + 1) % furLengthOptions.size()
+	var furLengthStart = currentFurLengthIndex
+	
+	# update button text to whatever is currently selected
+	var currentFurLength = furLengthOptions[currentFurLengthIndex]
+	furLengthBtn.text = currentFurLength["name"]
+	match currentFurLength["name"]:
+		"shorthair":
+			updateGeneticCode(Enums.GenePosition.FUR_LENGTH, "0")
+		"midhair":
+			updateGeneticCode(Enums.GenePosition.FUR_LENGTH, "2")
+			updateGeneticCode(Enums.GenePosition.FUR_VARIETY, "0")
+		"longhair":
+			updateGeneticCode(Enums.GenePosition.FUR_LENGTH, "2")
+			updateGeneticCode(Enums.GenePosition.FUR_VARIETY, "1")
 
 func _on_changeEyeColour_slider_value_changed(value: float) -> void:	
 	var index = int(round(value))
@@ -431,6 +458,7 @@ func _on_changeEyeColour_slider_value_changed(value: float) -> void:
 	#update genetic code 
 	updateGeneticCode(EYE_PIGMENT, str(pigment))
 	updateGeneticCode(EYE_REFRACTION, str(refraction))
+	validateCat()
 
 
 func _on_randomise_button_pressed() -> void:
@@ -494,8 +522,14 @@ func _on_randomise_button_pressed() -> void:
 	updateGeneticCode(EYE_PIGMENT, str(pigment))
 	updateGeneticCode(EYE_REFRACTION, str(refraction))
 	
+	# randomise fur length and variety!
+	var furLength = "0" if randi() % 2 == 0 else "2"
+	updateGeneticCode(Enums.GenePosition.FUR_LENGTH, str(furLength))
+	updateGeneticCode(Enums.GenePosition.FUR_VARIETY, str(randi_range(0,1)))
+	
 	leaderCat.prefix = nameDB.randomPrefix(Appearance.describeThisCatsAppearance(leaderCat.genetic_code))
 	$newLeaderPrefix_textEdit.text = leaderCat.prefix
+	validateCat()
 
 
 func _on_prefixInput_text_submitted(newPrefix: String) -> void:
@@ -532,3 +566,38 @@ func _on_mainMenu_goBackBtn_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
 	AudioManager.get_node("pageTurn").play() #play page turn noise
 	get_tree().change_scene_to_file("res://scenes/main/mainMenu.tscn")
+
+func validateCat() -> void:
+	# this is to be called when player chooses a gene option 
+	# check:
+	# red CANT be 2 (TORTOISESHELL) if sex is 0 (MALE)
+	# tabby CANT be 0 (solid) if red is 1 (RED)
+	# if either of these are true, their values MUST be reset (red gets set to 0, tabby gets set to 1)
+	var currentSex = geneticCode[Enums.GenePosition.SEX]
+	var currentRed = geneticCode[Enums.GenePosition.RED]
+	var currentTabby = geneticCode[Enums.GenePosition.TABBY]
+	
+	var needsUpdate = false 
+	
+	# males (sex = 0) cannot be tortoiseshell (red = 2
+	if currentSex == "0" and currentRed == "2":
+		print("LEADER CUSTOMISATION validation: male cat cannot be tortoiseshell, setting red to 0")
+		updateGeneticCode(Enums.GenePosition.RED, "0")
+		needsUpdate = true
+		for i in range(coatColours.size()):
+			if not coatColours[i]["female_only"]:
+				currentCoatIndex = i
+				break
+		updateCoatColourDisplay()
+	
+	if currentRed == "1" and currentTabby == "0":
+		print("LEADER CUSTOMISATION validation: red cats must be tabby, setting tabby to 2")
+		updateGeneticCode(Enums.GenePosition.TABBY, "2")
+		needsUpdate = true 
+		
+		currentTabbyIndex = 1 
+		$"../starclanMenu/VBoxContainer2/changeTabby".text = tabbyOptions[currentTabbyIndex]["name"]
+	
+	if needsUpdate:
+		print("LEADER CUSTOMISATION validation complete, genetic code updated: ", geneticCode)
+		leaderCat.genetic_code = geneticCode

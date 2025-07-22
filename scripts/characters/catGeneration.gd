@@ -116,6 +116,10 @@ static func ranGenCat_NotWeighted() -> String:
 	var eyeRefraction = rng.randi_range(0, 6)
 	newCatGeneticCode += str(eyePigment) 
 	newCatGeneticCode += str(eyeRefraction) 
+
+	# fur length variation: 
+	var furVariety = rng.randi_range(0, 1)
+	newCatGeneticCode += str(furVariety)
 	
 	return newCatGeneticCode
 

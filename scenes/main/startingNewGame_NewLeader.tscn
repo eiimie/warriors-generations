@@ -94,7 +94,7 @@ text = "not white"
 [node name="changeFurLength" type="Button" parent="starclanMenu/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_qfnf1")
-text = "shorthaired"
+text = "shorthair"
 
 [node name="changeEyeColourSlider" type="HSlider" parent="starclanMenu/VBoxContainer2"]
 layout_mode = 2
@@ -187,7 +187,6 @@ text = "Design your starting leader"
 horizontal_alignment = 1
 
 [node name="DEBUGDELETELATER_GENETICCODE" type="Label" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = 41.0
 offset_top = 167.0
