@@ -1,8 +1,8 @@
 extends Control
 
 @onready var nameLabel = $ui_portraitBox/VBoxContainer/memberName_label
-@onready var ageLabel = $ui_portraitBox/VBoxContainer/HBoxContainer/memberAge_label
-@onready var roleLabel = $ui_portraitBox/VBoxContainer/HBoxContainer/memberRole_label
+@onready var ageLabel = $ui_portraitBox/VBoxContainer/memberAge_label
+@onready var roleLabel = $ui_portraitBox/VBoxContainer/memberRole_label
 @onready var portrait = $ui_portraitBox/CenterContainer/catPortrait
 @onready var descriptionLabel = $ui_portraitBox/VBoxContainer/description_label
 
@@ -19,7 +19,7 @@ func displayMember(member: Member) -> void:
 	print("Member type:", typeof(member.name))
 	nameLabel.text = member.name 
 	ageLabel.text = str(member.age) + " moons old"
-	roleLabel.text = member.getRoleName(member.rank) + ", "
+	roleLabel.text = (member.getRoleName(member.rank).to_lower())
 	if member.rank == 0:
 		descriptionLabel.text = "this is you"
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cf1a4xmw731qo"]
+[gd_scene load_steps=12 format=3 uid="uid://cf1a4xmw731qo"]
 
 [ext_resource type="Texture2D" uid="uid://bf3xkytqjsi1l" path="res://assets/art/Art by Tiziano Zhou - Placeholder DELETE LATER DO NOT USE IN RELEASE.jpg" id="1_76bhb"]
 [ext_resource type="Script" path="res://scenes/main/newLeaderScreen.gd" id="1_jxsny"]
@@ -7,7 +7,6 @@
 [ext_resource type="Theme" uid="uid://ro4pnv2rc2x7" path="res://assets/ui/themes and styleboxes/defaultTheme.tres" id="4_qfnf1"]
 [ext_resource type="Texture2D" uid="uid://dfk8mcyytqooj" path="res://assets/ui/ui_menuButton_darkBrown.png" id="5_bu48f"]
 [ext_resource type="Texture2D" uid="uid://by2ehst5majj4" path="res://assets/ui/randomiseButton.png" id="5_sdvi6"]
-[ext_resource type="Texture2D" uid="uid://bleub44je3ikp" path="res://assets/ui/ui_catPortraitBackground.png" id="6_2pm73"]
 [ext_resource type="Texture2D" uid="uid://ecxgcskpbghw" path="res://assets/images/maleSex.png" id="6_uep0k"]
 [ext_resource type="Texture2D" uid="uid://nadrnohs4bix" path="res://assets/ui/ui_mainMenuCornerDeco.png" id="8_2jmx4"]
 
@@ -60,13 +59,22 @@ patch_margin_bottom = 40
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[node name="changePersonalityBtn" type="Button" parent="starclanMenu"]
+layout_mode = 2
+offset_left = 387.0
+offset_top = 746.0
+offset_right = 722.0
+offset_bottom = 832.0
+theme = ExtResource("4_qfnf1")
+text = "change personality"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="starclanMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.406721
-anchor_top = 0.694334
-anchor_right = 0.599073
-anchor_bottom = 0.707256
+anchor_left = 0.195251
+anchor_top = 0.609841
+anchor_right = 0.387603
+anchor_bottom = 0.704274
 offset_left = -95.0
 offset_top = -185.5
 offset_right = 95.0
@@ -102,58 +110,48 @@ max_value = 62.0
 
 [node name="finishedButton" type="Button" parent="starclanMenu"]
 layout_mode = 2
-offset_left = 484.0
-offset_top = 939.0
-offset_right = 895.0
-offset_bottom = 1025.0
+offset_left = 33.0
+offset_top = 884.0
+offset_right = 446.0
+offset_bottom = 970.0
 theme = ExtResource("4_qfnf1")
 text = "I'm ready to play. Save this leader!"
 
 [node name="randomiseButton" type="Button" parent="starclanMenu"]
 layout_mode = 2
-offset_left = 337.0
-offset_top = 267.0
-offset_right = 586.0
-offset_bottom = 353.0
+offset_left = 437.0
+offset_top = 258.0
+offset_right = 686.0
+offset_bottom = 344.0
 theme = ExtResource("4_qfnf1")
 text = "randomise leader"
 
 [node name="randomisePrefixButton" type="Button" parent="starclanMenu"]
 layout_mode = 2
-offset_left = 411.0
-offset_top = 188.0
-offset_right = 491.0
-offset_bottom = 274.0
+offset_left = 359.0
+offset_top = 259.0
+offset_right = 439.0
+offset_bottom = 345.0
 theme = ExtResource("4_qfnf1")
 text = "
 "
-flat = true
 
 [node name="randomisePrefix_Symbol" type="TextureRect" parent="starclanMenu/randomisePrefixButton"]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 11.0
-offset_right = 73.0
-offset_bottom = 75.0
+offset_left = 23.0
+offset_top = 23.0
+offset_right = 58.0
+offset_bottom = 58.0
 texture = ExtResource("5_sdvi6")
+stretch_mode = 2
 metadata/_edit_lock_ = true
-
-[node name="Label" type="Label" parent="starclanMenu"]
-layout_mode = 0
-offset_left = 519.0
-offset_top = 858.0
-offset_right = 891.0
-offset_bottom = 955.0
-text = "note: this button will reset genetically impossible traits (like male torties)!"
-autowrap_mode = 2
-text_overrun_behavior = 2
 
 [node name="changeSex" type="Button" parent="starclanMenu"]
 layout_mode = 2
-offset_left = 339.0
-offset_top = 188.0
-offset_right = 419.0
-offset_bottom = 274.0
+offset_left = 287.0
+offset_top = 259.0
+offset_right = 367.0
+offset_bottom = 345.0
 theme = ExtResource("4_qfnf1")
 text = "
 "
@@ -167,6 +165,34 @@ offset_bottom = 86.0
 scale = Vector2(0.559995, 0.559995)
 texture = ExtResource("6_uep0k")
 metadata/_edit_lock_ = true
+
+[node name="whoAreYou_decoLabel" type="Label" parent="starclanMenu"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 82.0
+offset_right = 539.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Who are you?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="personalityDescription" type="Label" parent="starclanMenu"]
+layout_mode = 0
+offset_left = 391.0
+offset_top = 481.0
+offset_right = 695.0
+offset_bottom = 724.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Principled and precise.
+
+This cat always knows right from wrong and strives to do things perfectly,. though he can be a bit strict and serious."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -197,30 +223,29 @@ metadata/_edit_use_anchors_ = true
 
 [node name="newLeader_AllegianceDescription_Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 698.0
-offset_top = 352.0
-offset_right = 975.0
-offset_bottom = 393.0
+offset_left = 930.0
+offset_top = 357.0
+offset_right = 1301.0
+offset_bottom = 398.0
 theme_override_colors/font_color = Color(0.1465, 0.0579143, 0.00260801, 1)
 text = "a grey tabby tom"
-horizontal_alignment = 1
 
 [node name="newLeaderPrefix_textEdit" type="LineEdit" parent="Control"]
 layout_mode = 0
-offset_left = 974.0
-offset_top = 101.0
-offset_right = 1240.0
-offset_bottom = 185.0
+offset_left = 932.0
+offset_top = 158.0
+offset_right = 1198.0
+offset_bottom = 242.0
 theme = SubResource("Theme_hf772")
 theme_override_font_sizes/font_size = 30
 text = "Prefix"
 
 [node name="newLeaderSuffix_Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1233.0
-offset_top = 100.0
-offset_right = 1330.0
-offset_bottom = 176.0
+offset_left = 1206.0
+offset_top = 159.0
+offset_right = 1303.0
+offset_bottom = 235.0
 theme_override_colors/font_color = Color(0.158196, 0.0626182, 0.0129058, 1)
 theme_override_font_sizes/font_size = 30
 text = "star"
@@ -439,22 +464,12 @@ offset_bottom = 580.0
 max_value = 9.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ui_catPortraitBox_TEMP" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 694.0
-offset_top = 79.0
-offset_right = 968.0
-offset_bottom = 363.0
-texture = ExtResource("6_2pm73")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="catPortrait_LeaderInstance" parent="Control" instance=ExtResource("2_3mhf7")]
-offset_left = 828.0
-offset_top = 216.0
-offset_right = 828.0
-offset_bottom = 216.0
-scale = Vector2(2.04, 2.04)
+layout_mode = 1
+offset_left = 676.0
+offset_top = 141.0
+offset_right = 741.0
+offset_bottom = 236.0
 
 [node name="mainMenu_GoBackBtn" type="Button" parent="."]
 offset_left = 28.0
@@ -464,6 +479,67 @@ offset_bottom = 135.0
 theme = ExtResource("4_qfnf1")
 text = "back to menu"
 
+[node name="startingMenuBox" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2215.0
+offset_top = 254.0
+offset_right = 2725.0
+offset_bottom = 890.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ej1vq")
+region_rect = Rect2(2.5, -1.64463, 503, 409.517)
+patch_margin_left = 27
+patch_margin_top = 87
+patch_margin_right = 37
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="explanation_story_lbl" type="Label" parent="startingMenuBox"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 87.0
+offset_right = 461.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "You've chosen to form a society of your own - a fresh beginning.
+
+First things first, who are you? Who is the one who will guide your cats through the seasons ahead? And what will your clan be called?
+
+This is your story. Make it count."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="clan_label_lbl" type="Label" parent="startingMenuBox"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 495.0
+offset_right = 422.0
+offset_bottom = 571.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "clan"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="newClanPrefix_textEdit" type="LineEdit" parent="startingMenuBox"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 495.0
+offset_right = 343.0
+offset_bottom = 579.0
+theme = SubResource("Theme_hf772")
+theme_override_font_sizes/font_size = 30
+text = "Prefix"
+
+[connection signal="pressed" from="starclanMenu/changePersonalityBtn" to="Control" method="_on_changePersonalityBtn_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeColour" to="Control" method="_on_coatColourButton_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeTabby" to="Control" method="_on_changeTabbyBtn_pressed"]
 [connection signal="pressed" from="starclanMenu/VBoxContainer2/changeWhiteness" to="Control" method="_on_changeWhiteness_pressed"]

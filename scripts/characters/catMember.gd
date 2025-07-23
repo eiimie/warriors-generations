@@ -11,6 +11,11 @@ var prefix: String
 var suffix: String
 var isPregnant: bool
 var pregnancyProgress: int
+var primaryPersonality : int 
+var secondaryPersonality : int
+var traits : Array = []
+var quirk : String
+var mood_bias : String
 
 # returns what role they are 
 func getRoleName(rank) -> String: 

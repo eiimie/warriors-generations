@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://kqhtqhtwgw6e"]
 
 [ext_resource type="Script" path="res://scenes/main/game.gd" id="1_d3ldv"]
-[ext_resource type="PackedScene" uid="uid://brpr71os1rsp2" path="res://scenes/characters/memberDisplay.tscn" id="2_ovlne"]
+[ext_resource type="PackedScene" uid="uid://brpr71os1rsp2" path="res://scenes/characters/leaderDisplay.tscn" id="2_ovlne"]
 [ext_resource type="Texture2D" uid="uid://nadrnohs4bix" path="res://assets/ui/ui_mainMenuCornerDeco.png" id="3_5yba3"]
 [ext_resource type="Theme" uid="uid://ro4pnv2rc2x7" path="res://assets/ui/themes and styleboxes/defaultTheme.tres" id="4_ugx5x"]
 [ext_resource type="Texture2D" uid="uid://cfb4k2uyqheub" path="res://assets/ui/ui_moonCounterFrame.png" id="5_bq65i"]
@@ -34,10 +34,10 @@ offset_bottom = 41.0
 text = "Open debug menu"
 
 [node name="leaderDisplay" parent="." instance=ExtResource("2_ovlne")]
-offset_left = 1136.0
-offset_top = -248.0
-offset_right = 1136.0
-offset_bottom = -248.0
+offset_left = 997.0
+offset_top = -250.0
+offset_right = 997.0
+offset_bottom = -250.0
 
 [node name="debugMenu_VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -162,11 +162,8 @@ layout_direction = 2
 layout_mode = 0
 offset_left = 33.0
 offset_top = 84.0
-offset_right = 468.0
+offset_right = 716.0
 offset_bottom = 662.0
-
-[node name="memberDisplay" parent="clanView_uiBox/GridContainer" instance=ExtResource("2_ovlne")]
-layout_mode = 2
 
 [node name="clanName_uiBox" type="NinePatchRect" parent="."]
 layout_mode = 1

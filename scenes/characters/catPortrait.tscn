@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj5yfd4huc0bl"]
+[gd_scene load_steps=9 format=3 uid="uid://bj5yfd4huc0bl"]
 
 [ext_resource type="Script" path="res://scenes/characters/catPortrait.gd" id="1_c4wl5"]
+[ext_resource type="Texture2D" uid="uid://45qufwyjt4gp" path="res://assets/art/cat/catBackground.png" id="2_1ovrg"]
 [ext_resource type="Texture2D" uid="uid://d2j6fjy70qmxg" path="res://assets/art/cat/base/short_blue.png" id="2_qm0h0"]
 [ext_resource type="Texture2D" uid="uid://bsmpww7osta7f" path="res://assets/art/cat/eyecolour/74.png" id="3_k5kc8"]
 [ext_resource type="Texture2D" uid="uid://cydtisxlebrq1" path="res://assets/art/cat/pattern/short_mackerel.png" id="4_s2vrl"]
@@ -9,27 +10,84 @@
 [ext_resource type="Texture2D" uid="uid://bg0182g0fad8w" path="res://assets/art/cat/lineart/short.png" id="7_tuh48"]
 
 [node name="catPortrait" type="Control"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 33.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_c4wl5")
 
-[node name="Node2D" type="Node2D" parent="."]
-scale = Vector2(0.4, 0.4)
+[node name="SubViewport" type="SubViewport" parent="."]
 
-[node name="baseColour" type="Sprite2D" parent="Node2D"]
+[node name="backgroundPanel_img" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -4.0
+offset_right = 218.0
+offset_bottom = 247.0
+texture = ExtResource("2_1ovrg")
+expand_mode = 1
+
+[node name="baseColour" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("2_qm0h0")
+expand_mode = 1
 
-[node name="eyes" type="Sprite2D" parent="Node2D"]
+[node name="eyes" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("3_k5kc8")
+expand_mode = 1
 
-[node name="pattern" type="Sprite2D" parent="Node2D"]
+[node name="pattern" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("4_s2vrl")
+expand_mode = 1
 
-[node name="leather" type="Sprite2D" parent="Node2D"]
+[node name="leather" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("5_q8yy8")
+expand_mode = 1
 
-[node name="white" type="Sprite2D" parent="Node2D"]
+[node name="white" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("6_bce2j")
+expand_mode = 1
 
-[node name="lineart" type="Sprite2D" parent="Node2D"]
+[node name="lineart" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 228.0
+offset_bottom = 243.0
 texture = ExtResource("7_tuh48")
+expand_mode = 1

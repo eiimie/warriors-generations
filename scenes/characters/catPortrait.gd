@@ -3,15 +3,15 @@
 
 extends Control
 
-@onready var lineart = $Node2D/lineart
-@onready var base = $Node2D/baseColour
-@onready var pattern = $Node2D/pattern
-@onready var white = $Node2D/white
-@onready var eyes = $Node2D/eyes
-@onready var leather = $Node2D/leather
+@onready var lineart = $lineart
+@onready var base = $baseColour
+@onready var pattern = $pattern
+@onready var white = $white
+@onready var eyes = $eyes
+@onready var leather = $leather
 
 func resetPortrait():
-	var sprite_container = $Node2D
+	var sprite_container = $"."
 	for child in sprite_container.get_children():
 		if child is Sprite2D:
 			child.texture = null

@@ -85,6 +85,45 @@ var furLengthOptions = [
 var maleIcon = preload("res://assets/images/maleSex.png")
 var femaleIcon = preload("res://assets/images/femaleSex.png")
 
+# personality customisation
+@onready var personalityDescription = $"../starclanMenu/personalityDescription"
+@onready var personalities = [
+	{"id": 0, "maleText": "Principled and precise.\n\nThis warrior always knows right from wrong and strives to do things perfectly... though he can be a bit strict and serious.", "femaleText": "Principled and precise.\n\nThis warrior always knows right from wrong and strives to do things perfectly... though she can be a bit strict and serious."},
+	{"id": 1, "maleText": "Caring and devoted.\n\nThis warrior loves supporting others and will always be there, even if it means putting himself last.", "femaleText": "Caring and devoted.\n\nThis warrior loves supporting others and will always be there, even if it means putting herself last."},
+	{"id": 2, "maleText": "Driven and confident.\n\nSuccess is everything for this warrior, who loves to impress and get things done efficiently.", "femaleText": "Driven and confident.\n\nSuccess is everything for this warrior, who loves to impress and get things done efficiently."},
+	{"id": 3, "maleText": "Sensitive and creative.\n\nThis warrior marches to his own beat, often feeling different but full of deep emotions.", "femaleText": "Sensitive and creative.\n\nThis warrior marches to her own beat, often feeling different but full of deep emotions."},
+	{"id": 4, "maleText": "Quiet and curious.\n\nA thinker who loves to explore and understand, but keeps a bit of distance from others.", "femaleText": "Quiet and curious.\n\nA thinker who loves to explore and understand, but keeps a bit of distance from others."},
+	{"id": 5, "maleText": "Steadfast and cautious.\n\nThis warrior values safety and loyalty, always ready to protect his own but prone to worry.", "femaleText": "Steadfast and cautious.\n\nThis warrior values safety and loyalty, always ready to protect her own but prone to worry.", },
+	{"id": 6, "maleText": "Playful and spontaneous.\n\nFull of energy and excitement, this warrior always seeks the next fun adventure.", "femaleText": "Playful and spontaneous.\n\nFull of energy and excitement, this warrior always seeks the next fun adventure."},
+	{"id": 7, "maleText": "Bold and protective.\n\nA strong-willed warrior who takes charge and stands his ground without hesitation.", "femaleText": "Bold and protective.\n\nA strong-willed warrior who takes charge and stands her ground without hesitation."},
+	{"id": 8, "maleText": "Calm and easygoing.\n\nThis warrior prefers harmony, avoids fights, and brings a gentle calm to everycat nearby.", "femaleText": "Calm and easygoing.\n\nThis warrior prefers harmony, avoids fights, and brings a gentle calm to everycat nearby."}
+]
+
+var currentPersonalityIndex = 0
+var isMale = true # or false depending on leader's sex
+
+# function to update the label text based on current personality and sex 
+func updatePersonalityDescription() -> void:
+	if leaderCat.sex == 0:
+		isMale = true
+	else:
+		isMale = false 
+	
+	var personality = personalities[currentPersonalityIndex]
+	if isMale:
+		personalityDescription.text = personality["maleText"]
+	else:
+		personalityDescription.text = personality["femaleText"]
+
+# function to cycle to the next personality option
+func cycleNextPersonality() -> void:
+	currentPersonalityIndex += 1
+	# wrap around to 0 if we go past the last personality 
+	if currentPersonalityIndex >= personalities.size():
+		currentPersonalityIndex = 0
+	# update the label text to reflect the new personality
+	updatePersonalityDescription()
+
 func updateCoatColourDisplay() -> void:
 	var coat = coatColours[currentCoatIndex]
 	coatColourLabel.text = coat["name"]
@@ -189,7 +228,9 @@ func _ready():
 		bgm.play()
 	
 	sexIcon.texture = preload("res://assets/images/maleSex.png")
+	updatePersonalityDescription()
 	
+	# default leader values :3 
 	leaderCat.lives = 9
 	leaderCat.sex = 0
 	leaderCat.age = randi_range(13,20)
@@ -353,6 +394,7 @@ func _on_changeSexButton_pressed() -> void:
 	updateGeneticCode(0, str(sex))
 
 	validateCat()
+	updatePersonalityDescription()
 
 func _on_changeWhiteness_pressed() -> void:
 	AudioManager.get_node("buttonClick").play() # play button click noise
@@ -527,6 +569,10 @@ func _on_randomise_button_pressed() -> void:
 	updateGeneticCode(Enums.GenePosition.FUR_LENGTH, str(furLength))
 	updateGeneticCode(Enums.GenePosition.FUR_VARIETY, str(randi_range(0,1)))
 	
+	# lastly, randomise personality 
+	var randomPersonalityIndex = randi_range(0, personalities.size() - 1)
+	cycleNextPersonality()
+	
 	leaderCat.prefix = nameDB.randomPrefix(Appearance.describeThisCatsAppearance(leaderCat.genetic_code))
 	$newLeaderPrefix_textEdit.text = leaderCat.prefix
 	validateCat()
@@ -601,3 +647,8 @@ func validateCat() -> void:
 	if needsUpdate:
 		print("LEADER CUSTOMISATION validation complete, genetic code updated: ", geneticCode)
 		leaderCat.genetic_code = geneticCode
+
+
+func _on_changePersonalityBtn_pressed() -> void:
+	AudioManager.get_node("buttonClick").play() # play button click noise
+	cycleNextPersonality() 

@@ -28,3 +28,6 @@ enum personalityType {
 # cats.traits.append_array(profile["common_traits"].pick_random(2))
 # cat.quirks.append(quirks.pick_random())
 # cat.moodBias = profile["mood_bias"]
+
+# personality - pick 1 common trait, 1 strength, and 1 weakness, combine with a quirk
+# e.g. for a REFORMER - [disciplined], [responsible], [overly serious] cat who [overthinks everything]

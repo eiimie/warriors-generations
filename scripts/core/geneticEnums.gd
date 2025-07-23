@@ -18,62 +18,62 @@ enum GenePosition {
 # INDIVIDUAL GENE ENUMS -- 
 
 enum Sex { 
-    MALE = 0,
-    FEMALE = 1
+	MALE = 0,
+	FEMALE = 1
 }
 
 enum FurLength {
-    SHORT = 0,
-    SHORT_CARRY_LONG = 1,
-    LONG = 2 
+	SHORT = 0,
+	SHORT_CARRY_LONG = 1,
+	LONG = 2 
 }
 
 # black pigment alleles
 enum Eumelanin {
-    BLACK = 0, 
-    BLACK_CARRY_CHOCOLATE = 1,
-    BLACK_CARRY_CINNAMON = 2,
-    CHOCOLATE = 3,
-    CHOCOLATE_CARRY_CINNAMON = 4, 
-    CINNAMON = 5
+	BLACK = 0, 
+	BLACK_CARRY_CHOCOLATE = 1,
+	BLACK_CARRY_CINNAMON = 2,
+	CHOCOLATE = 3,
+	CHOCOLATE_CARRY_CINNAMON = 4, 
+	CINNAMON = 5
 }
 
 enum Red {
-    NOT_RED = 0, #XO
-    RED = 1, # Xo
-    TORTOISESHELL = 2 # XOXo females only 
+	NOT_RED = 0, #XO
+	RED = 1, # Xo
+	TORTOISESHELL = 2 # XOXo females only 
 }
 
 enum Dilution { 
-    NOT_DILUTE = 0,
-    NOT_DILUTE_CARRY_DILUTE = 1,
-    DILUTE = 2
+	NOT_DILUTE = 0,
+	NOT_DILUTE_CARRY_DILUTE = 1,
+	DILUTE = 2
 }
 
 enum Tabby { 
-    SOLID = 0,
-    SOLID_CARRY_TABBY = 1,
-    TABBY = 2
+	SOLID = 0,
+	SOLID_CARRY_TABBY = 1,
+	TABBY = 2
 }
 
 enum TabbyPattern {
-    MACKEREL = 0,
-    MACKEREL_CARRY_BLOTCHED = 1,
-    BLOTCHED = 2
+	MACKEREL = 0,
+	MACKEREL_CARRY_BLOTCHED = 1,
+	BLOTCHED = 2
 }
 
 # not implemented
 enum Silver {
-    SILVER = 0,
-    SILVER_CARRY_NOT_SILVER = 1,
-    NOT_SILVER = 2
+	SILVER = 0,
+	SILVER_CARRY_NOT_SILVER = 1,
+	NOT_SILVER = 2
 }
 
 # not implemented
 enum Point { 
-    NOT_POINT = 0,
-    NOT_POINT_CARRY_POINT = 1,
-    POINT = 2
+	NOT_POINT = 0,
+	NOT_POINT_CARRY_POINT = 1,
+	POINT = 2
 }
 
 # leather colours

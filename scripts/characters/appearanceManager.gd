@@ -41,7 +41,7 @@ static func describeThisCat(genCode: String) -> String:
 			catDescription += "white "
 		else:
 			# it doesn't! describe it normally
-			if whiteness == "0" or "1" or "2" or "3":
+			if whiteness in ["4", "5", "6", "7"]:
 				catDescription += "bicolour "
 			else:
 				catDescription = catDescription

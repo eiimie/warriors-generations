@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hg0or8ccearh"
-path="res://.godot/imported/ui_portraitFrame.png-19d4be939b755c670ae0484b0b70033a.ctex"
+uid="uid://45qufwyjt4gp"
+path="res://.godot/imported/catBackground.png-985ebd5cbacf9997a9bbe64d797cade3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/ui_portraitFrame.png"
-dest_files=["res://.godot/imported/ui_portraitFrame.png-19d4be939b755c670ae0484b0b70033a.ctex"]
+source_file="res://assets/art/cat/catBackground.png"
+dest_files=["res://.godot/imported/catBackground.png-985ebd5cbacf9997a9bbe64d797cade3.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

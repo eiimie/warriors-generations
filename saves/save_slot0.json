@@ -1,0 +1,45 @@
+{
+	"currentMoon": 0,
+	"population": 2,
+	"livingCatCount": 2,
+	"leaderId": 1,
+	"cats": [
+		{
+			"id": 1,
+			"name": "Asterstar",
+			"sex": 0,
+			"age": 30,
+			"rank": 0,
+			"genetic_code": "0000220002186",
+			"prefix": "Aster",
+			"suffix": "star",
+			"isPregnant": false,
+			"pregnancyProgress": 0,
+			"lives": 9
+		},
+		{
+			"id": 2,
+			"name": "Cloudcream",
+			"sex": 1,
+			"age": 23,
+			"rank": 3,
+			"genetic_code": "12020000092001",
+			"prefix": "Cloud",
+			"suffix": "cream",
+			"isPregnant": false,
+			"pregnancyProgress": 0
+		},
+		{
+			"id": 3,
+			"name": "Butterflypaw",
+			"sex": 1,
+			"age": 15,
+			"rank": 2,
+			"genetic_code": "12400220002860",
+			"prefix": "Butterfly",
+			"suffix": "paw",
+			"isPregnant": false,
+			"pregnancyProgress": 0
+		}
+	]
+}
